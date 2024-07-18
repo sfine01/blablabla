@@ -27,10 +27,6 @@
     - name: asd
       condition: event.alert.labels.alertname == "ClusterUp"
       action:
-        run_module:
-          name: ansible.builtin.git
-          module_args:
-              repo: 'https://github.com/sfine01/demo-event-driven-ansible.git'
-              dest: /tmp/checkout
-              single_branch: yes
-              version: 'main'
+        run_job_template:
+          name: mynameisshay
+          Organization: Default
