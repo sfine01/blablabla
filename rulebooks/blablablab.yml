@@ -10,18 +10,21 @@
         data_path_separator: .
         skip_original_data: true
 
+
+
   rules:
+    - name: asdas222222
+      condition: "" == "" 
+      action:
+        debug:
+          msg: "fooood"
+
+
     - name: asdasd
       condition: event.alert.labels.alertname == "ClusterUp" 
       action:
         debug:
           msg: "{{ event.alert.labels.alertname }}"
-
-    - name: asdas222222
-      condition: event.alert.labels.alertname == "ClusterUp" 
-      action:
-        debug:
-          msg: "fooood"
 
     - name: asd2222
       condition: event.alert.labels.alertname == "ClusterUp"
