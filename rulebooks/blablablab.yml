@@ -13,12 +13,6 @@
 
 
   rules:
-    - name: asdas222222
-      condition: "" == "" 
-      action:
-        debug:
-          msg: "fooood"
-
 
     - name: asdasd
       condition: event.alert.labels.alertname == "ClusterUp" 
