@@ -22,7 +22,7 @@
           organization: Default
 
     - name: asdasd
-      condition: event.alert.labels.alertname == "ClusterUp" 
+      condition: "dog" == "dog"
       action:
         debug:
           msg: "helooooooooooooooooo"
