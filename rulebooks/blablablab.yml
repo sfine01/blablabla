@@ -37,3 +37,20 @@
         debug:
           msg: "{{ event }}"
 
+    - name: prints eventsssss
+      condition: event.alert.labels.alertname == "ClusterUp"
+      action:
+        debug:
+          msg: "{{ events }}"
+
+    - name: prints facts
+      condition: event.alert.labels.alertname == "ClusterUp"
+      action:
+        debug:
+          msg: "{{ facts }}"
+          
+    - name: prints facts
+      condition: event.alert.labels.alertname == "ClusterUp"
+      action:
+        debug:
+          msg: "{{ fact }}"
