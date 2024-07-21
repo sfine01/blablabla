@@ -12,4 +12,6 @@
     - name: set fact
       ansible.builtin.set_stats:
         data:
-          dog: "{{ shopping }}"
+          cluster: "{{ shopping }}"
+          activity: "blop blop"
+          
