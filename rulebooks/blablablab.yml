@@ -38,7 +38,7 @@
           var: facts
 
 
-    - name: prints something2
+    - name: prints something3
       condition: event.alert.labels.alertname == "ClusterUp"
       action:
         debug:
