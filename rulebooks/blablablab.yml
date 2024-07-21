@@ -15,6 +15,13 @@
 
   rules:
 
+    - name: plzwork and do things
+      condition: "dog" == "dog"
+      action:
+        debug:
+          msg: "helooooooooooooooooo"
+
+
     - name: asd2222
       condition: event.alert.labels.alertname == "ClusterUp"
       action:
