@@ -14,6 +14,6 @@
         data:
           dog: "IM a dog hello hello"
 
-    - name: hi hi hi 
-      debug:
-        msg: "{{ shopping_list }}"‎
+    # - name: hi hi hi 
+    #   debug:
+    #     msg: "{{ shopping_list }}"‎
