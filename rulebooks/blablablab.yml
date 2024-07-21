@@ -16,7 +16,7 @@
   rules:
 
     - name: plzwork and do things
-      condition: "dog" == "dog"
+      condition: event.alert.labels.alertname == "ClusterUp"
       action:
         debug:
           msg: "helooooooooooooooooo"
