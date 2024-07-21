@@ -6,3 +6,7 @@
     - name: hi shalom
       debug:
         msg: "HALLL"
+        
+    - name: set fact
+      set_fact:
+        dog: "IM a dog hello hello"
