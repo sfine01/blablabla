@@ -15,22 +15,22 @@
 
   rules:
 
-    - name: plzwork and do things
+    - name: print something
       condition: event.alert.labels.alertname == "ClusterUp"
       action:
         debug:
           msg: "helooooooooooooooooo"
 
 
-    - name: asd2222
+    - name: activates a playbook
       condition: event.alert.labels.alertname == "ClusterUp"
       action:
         run_job_template:
           name: mynameisshay
           organization: Default
 
-    - name: asdasd
-      condition: "dog" == "dog"
+    - name: prints something2
+      condition: event.alert.labels.alertname == "ClusterUp"
       action:
         debug:
           msg: "helooooooooooooooooo"
