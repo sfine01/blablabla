@@ -16,4 +16,4 @@
 
     - name: hi shalom
       debug:
-        var: shopping_list‎
+        msg: "{{ shopping_list }}"‎
