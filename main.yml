@@ -12,8 +12,4 @@
     - name: set fact
       ansible.builtin.set_stats:
         data:
-          dog: "IM a dog hello hello"
-          
-    - name: print var from file
-      debug:
-        msg: "{{ shopping }}"
+          dog: "{{ shopping }}"
