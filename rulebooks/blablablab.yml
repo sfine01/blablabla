@@ -31,7 +31,7 @@
           post_events: true
           
 
-    - name: prints something2
+    - name: prints something2 # This needs to be activity
       condition: event.dog == "IM a dog hello hello"
       action:
         print_event:
