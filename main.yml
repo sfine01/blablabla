@@ -10,3 +10,4 @@
     - name: set fact
       set_fact:
         dog: "IM a dog hello hello"
+        cacheable: true
