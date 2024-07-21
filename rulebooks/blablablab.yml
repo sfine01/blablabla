@@ -43,13 +43,13 @@
         debug:
           msg: "{{ events }}"
 
-    - name: prints facts
+    - name: prints facts123
       condition: event.alert.labels.alertname == "ClusterUp"
       action:
         debug:
           msg: "{{ facts }}"
           
-    - name: prints facts
+    - name: prints facts3asdasd
       condition: event.alert.labels.alertname == "ClusterUp"
       action:
         debug:
