@@ -5,7 +5,7 @@
   vars_files:
     - vars.yml
   tasks:
-    - name: hi shalom
+    - name: hi shalom1
       debug:
         msg: "HALLL"
         
@@ -14,6 +14,6 @@
         data:
           dog: "IM a dog hello hello"
 
-    - name: hi shalom
+    - name: hi hi hi 
       debug:
         msg: "{{ shopping_list }}"‎
