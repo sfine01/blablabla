@@ -35,4 +35,12 @@
       condition: event.alert.labels.alertname == "ClusterUp"
       action:
         debug:
-          var: dog
+          var: facts
+
+
+    - name: prints something2
+      condition: event.alert.labels.alertname == "ClusterUp"
+      action:
+        debug:
+          var: facts.dog
+
