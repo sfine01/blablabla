@@ -16,4 +16,4 @@
           
     - name: print var from file
       debug:
-        msg: "HALLL"
+        msg: "{{ shopping }}"
