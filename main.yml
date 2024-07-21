@@ -8,8 +8,6 @@
         msg: "HALLL"
         
     - name: set fact
-      set_fact:
-        dog: "IM a dog hello helloooo"
-        cacheable: true
-
-
+      ansible.builtin.set_stats:
+        data:
+          dog: "IM a dog hello hello"
