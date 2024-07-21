@@ -2,6 +2,8 @@
 - name: hello
   hosts: localhost
   gather_facts: false
+  vars_files:
+    - vars.yml
   tasks:
     - name: hi shalom
       debug:
@@ -11,3 +13,7 @@
       ansible.builtin.set_stats:
         data:
           dog: "IM a dog hello hello"
+
+    - name: hi shalom
+      debug:
+        var: shopping_list‎
