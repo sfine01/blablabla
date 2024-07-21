@@ -28,9 +28,11 @@
         run_job_template:
           name: mynameisshay
           organization: Default
+          set_facts: true
+          
 
     - name: prints something2
       condition: event.alert.labels.alertname == "ClusterUp"
       action:
         debug:
-          msg: "helooooooooooooooooo"
+          msg: "hehehehe :D"
