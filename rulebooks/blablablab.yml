@@ -28,36 +28,10 @@
         run_job_template:
           name: mynameisshay
           organization: Default
-          set_facts: true
+          post_events: true
           
 
     - name: prints something2
-      condition: event.alert.labels.alertname == "ClusterUp"
+      condition: event.dog == "IM a dog hello hello"
       action:
-        debug:
-          msg: "{{ event }}"
-
-    - name: prints eventsssss
-      condition: event.alert.labels.alertname == "ClusterUp"
-      action:
-        debug:
-          msg: "{{ events }}"
-
-    - name: prints facts123
-      condition: event.alert.labels.alertname == "ClusterUp"
-      action:
-        debug:
-          msg: "{{ facts }}"
-          
-    - name: prints facts3asdasd
-      condition: event.alert.labels.alertname == "ClusterUp"
-      action:
-        debug:
-          msg: "{{ fact }}"
-
-
-    - name: prints facts3asdasd
-      condition: facts.dog == "IM a dog hello hello"
-      action:
-        debug:
-          msg: "hello this is working"
+        print_event:
