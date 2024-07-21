@@ -28,7 +28,7 @@
         run_job_template:
           name: mynameisshay
           organization: Default
-          post_events: true
+          set_facts: true
           
 
     - name: prints something2
@@ -54,3 +54,10 @@
       action:
         debug:
           msg: "{{ fact }}"
+
+
+    - name: prints facts3asdasd
+      condition: facts.dog == "IM a dog hello hello"
+      action:
+        debug:
+          msg: "hello this is working"
