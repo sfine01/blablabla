@@ -13,7 +13,7 @@
       ansible.builtin.set_stats:
         data:
           dog: "IM a dog hello hello"
-
-    # - name: hi hi hi 
-    #   debug:
-    #     msg: "{{ shopping_list }}"‎
+          
+    - name: print var from file
+      debug:
+        msg: "HALLL"
