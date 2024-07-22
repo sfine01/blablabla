@@ -37,7 +37,7 @@
             msg: "HELLOOO"
         - set_fact:
             fact:
-              activities: "{{ activities | default([]) + ['BlaBlabla1'] }}"
+              activities: "{{ activities + ['BlaBlabla1'] }}"
 
     - name: Do things 3
       condition: event.dogs == "IM a dog hello hello"
@@ -46,7 +46,7 @@
             msg: "doing something 33"
         - set_fact:
             fact:
-              activities: "{{ activities | default([]) + ['NahNahNah'] }}"
+              activities: "{{ activities + ['NahNahNah'] }}"
 
     - name: print things list
       condition: event.dogs == "IM a dog hello hello"
@@ -57,7 +57,7 @@
 ###############################################################
 
     # - name: Update record files
-    #   condition: event.alert.labels.alertname == "ClusterUp"
+    #   condition: event.alert.labels.alertname == "ClusterUp" ##### If the activities list is empty dont do anything
     #   action:
     #     run_job_template:
     #       name: mynameisshay
