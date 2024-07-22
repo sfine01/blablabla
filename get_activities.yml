@@ -28,4 +28,4 @@
         
     - name: 
       debug:
-        msg: "{{ {{ cluster_name }}'_activities' }}"
+        msg: "{{ {{ cluster_name }}_activities }}"
