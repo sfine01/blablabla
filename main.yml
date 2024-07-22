@@ -2,8 +2,9 @@
 - name: hello
   hosts: localhost
   gather_facts: false
-  vars_files:
-    - vars.yml
+  vars:
+    repo_url: "https://github.com/sfine01/blablabla.git"
+    dest_dir: "/tmp/"
   tasks:
 
   # Clone git repo
@@ -18,3 +19,11 @@
           cluster: "{{ shopping }}"
           activity: "blop blop"
           dog: "IM a dog hello hello"
+
+    - name: set fact
+      shell:
+        cmd: pwd
+        
+    - name: set fact
+      shell:
+        cmd: ls
