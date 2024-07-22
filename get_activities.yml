@@ -4,7 +4,7 @@
   gather_facts: false
   vars:
     combined_name: "{{ cluster_name }}_activities"
-  var_files:
+  vars_files:
     - "record/clusters/{{ cluster_name }}.yml"
   tasks:
 
