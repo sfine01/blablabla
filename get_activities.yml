@@ -6,9 +6,6 @@
     - "record/clusters/{{ cluster_name }}.yml"
   tasks:
 
-  # Clone git repo
-  # set the write files as set_stat
-
     - name: setfacts something
       set_fact:
         dynamic_var_name: "{{ cluster_name }}_activities"
@@ -18,10 +15,11 @@
         msg: "{{ vars[dynamic_var_name] }}"
 
 
-      - name: set fact for bla bla bla 
+    - name: set fact for bla bla bla 
       ansible.builtin.set_stats:
         data:
           activity: "{{ vars[dynamic_var_name] }}"
+          
     # - name: 
     #   debug:
     #     msg: "{{ hostvars[cluster_name][combined_name] }}"
