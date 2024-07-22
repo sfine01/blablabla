@@ -17,4 +17,4 @@
         data:
           cluster: "{{ shopping }}"
           activity: "blop blop"
-          
+          dog: "IM a dog hello hello"
