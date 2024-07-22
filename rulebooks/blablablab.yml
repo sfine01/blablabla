@@ -38,6 +38,8 @@
         - set_fact:
             fact:
               activities: "bla bla bla"
+        - debug:
+
 
     - name: Do things 3
       condition: event.dogs == "IM a dog hello hello"
