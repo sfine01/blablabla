@@ -29,6 +29,15 @@
           name: mynameisshay
           organization: Default
           post_events: true
+
+      - name: activatity 1
+      condition: event.dog == "IM a dog hello hello"
+      action:
+        run_job_template:
+          name: copy_all_the_files
+          organization: Default
+          post_events: true
+          
           
 
     - name: prints something2 # This needs to be activity
