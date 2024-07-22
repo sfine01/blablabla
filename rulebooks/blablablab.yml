@@ -35,12 +35,22 @@
       actions:
         - debug:
             msg: "HELLOOO"
+        - set_fact:
+            activities: "{{ activities | default([]) + ['BlaBlabla1'] }}"
 
     - name: Do things 3
       condition: event.dogs == "IM a dog hello hello"
       actions:
         - debug:
             msg: "doing something 33"
+        - set_fact:
+            activities: "{{ activities | default([]) + ['NahNahNah'] }}"
+
+    - name: print things list
+      condition: event.dogs == "IM a dog hello hello"
+      action:
+          - ansible.builtin.debug:
+              msg: "{{ activities }}"
 
 ###############################################################
 
