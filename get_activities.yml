@@ -4,17 +4,22 @@
   gather_facts: false
   vars:
     dynamic_var_name: "{{ cluster_name }}_activities"
-  vars_files:
-    - "record/clusters/{{ cluster_name }}.yml"
+
   tasks:
+ 
+    - name: Include cluster-specific vars file
+      include_vars:
+        file: "record/clusters/{{ cluster_name }}.yml"
+      ignore_errors: yes
 
     - name: Print before setting artifacts
       debug:
-        msg: "{{ vars[dynamic_var_name] }}"
-
+        msg: "{{ vars[dynamic_var_name] | default('No activities found') }}"
+      ignore_errors: yes
 
     - name: Set artifacts
       ansible.builtin.set_stats:
         data:
-          activities: "{{ vars[dynamic_var_name] }}"
+          activities: "{{ vars[dynamic_var_name] | default([]) }}"
+      ignore_errors: yes
           
