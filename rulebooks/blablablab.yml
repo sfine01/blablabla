@@ -25,15 +25,28 @@
 
     - name: Do things 1
       condition: event.dog == "IM a dog hello hello"
-      action:
-        run_job_template:
-          name: copy_all_the_files
-          organization: Default
+      actions:
+        - run_job_template:
+            name: copy_all_the_files
+            organization: Default
           
     - name: Do things 2
       condition: event.dogs == "IM a dog hello hello"
-      action:
-        print_event:
+      actions:
+        - debug: "HELLOOO"
+
+    - name: Do things 3
+      condition: event.dogs == "IM a dog hello hello"
+      actions:
+        - debug: "doing something 33"
 
 ###############################################################
 
+    # - name: Update record files
+    #   condition: event.alert.labels.alertname == "ClusterUp"
+    #   action:
+    #     run_job_template:
+    #       name: mynameisshay
+    #       organization: Default
+    #       post_events: true
+    #       job_args: # pass here the set facts I have defined
