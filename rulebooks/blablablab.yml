@@ -1,5 +1,5 @@
 ---
-- name: Capture alertmanager alerts
+- name: cluster sync operation
   hosts: localhost
   match_multiple_rules: true
   sources:
@@ -15,32 +15,33 @@
 
   rules:
 
-    - name: print something
-      condition: event.alert.labels.alertname == "ClusterUp"
-      action:
-        debug:
-          msg: "helooooooooooooooooo"
 
-
-    - name: activates a playbook
+    - name: Get clusters activity list
       condition: event.alert.labels.alertname == "ClusterUp"
       action:
         run_job_template:
           name: mynameisshay
           organization: Default
           post_events: true
+          
+##############################################################
 
-      - name: activatity 1
+      - name: Do some shit
       condition: event.dog == "IM a dog hello hello"
       action:
         run_job_template:
           name: copy_all_the_files
           organization: Default
-          post_events: true
           
           
 
     - name: prints something2 # This needs to be activity
-      condition: event.dog == "IM a dog hello hello"
+      condition: event.dogs == "IM a dog hello hello"
       action:
         print_event:
+        
+##############################################################
+    # - name: update activity files 
+    #   condition: event.dog == "IM a dog hello hello"
+    #   action:
+    #     print_event:
