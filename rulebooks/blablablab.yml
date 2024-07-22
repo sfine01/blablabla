@@ -52,7 +52,7 @@
       condition: event.dogs == "IM a dog hello hello"
       action:
         debug:
-          msg: "{{ facts.activities }}"
+          msg: "{{ activities }}"
 
 ###############################################################
 
