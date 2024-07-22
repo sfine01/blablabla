@@ -8,17 +8,13 @@
     - "record/clusters/{{ cluster_name }}.yml"
   tasks:
 
-    # - name: setfacts something
-    #   set_fact:
-    #     dynamic_var_name: "{{ cluster_name }}_activities"
-
-    - name: Access the dynamic variable using vars lookup
+    - name: Print before setting artifacts
       debug:
         msg: "{{ vars[dynamic_var_name] }}"
 
 
-    - name: set fact for bla bla bla 
+    - name: Set artifacts
       ansible.builtin.set_stats:
         data:
-          activity: "{{ vars[dynamic_var_name] }}"
+          activities: "{{ vars[dynamic_var_name] }}"
           
