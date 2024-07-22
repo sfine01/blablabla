@@ -1,23 +1,34 @@
-- name: Listen for events on a webhook
+---
+- name: cluster sync operation
   hosts: localhost
-  ## Define our source for events
+  match_multiple_rules: true
   sources:
-     - ansible.eda.demo:
-        file_name: "/etc/motd"
-        delay: 5
-
+    - ansible.eda.alertmanager:
+        host: 0.0.0.0
+        port: 5050
+        data_alerts_path: alerts
+        data_host_path: labels.instance
+        data_path_separator: .
+        skip_original_data: true
+        
   rules:
-    ## Define the conditions we are looking for
-    - name: File exists
-      condition: event.demo.status == "exists"
-    ## Define the action we should take should the condition be met
+  
+    - name: Get clusters activity list
+      condition: event.alert.labels.alertname == "ClusterUp"
       action:
         run_job_template:
-          name: 'EDA - File exists'
-
-    - name: File missing
-      condition: event.demo.status == "missing"
-    ## Define the action we should take should the condition be met
+          name: mynameisshay
+          organization: Default
+          post_events: true
+          
+      - name: Do some shit
+      condition: event.dog == "IM a dog hello hello"
       action:
         run_job_template:
-          name: 'EDA - File missing'
+          name: copy_all_the_files
+          organization: Default
+          
+    - name: prints something2 # This needs to be activity
+      condition: event.dogs == "IM a dog hello hello"
+      action:
+        print_event:
