@@ -1,0 +1,10 @@
+---
+- name: copy_all_the_files
+  hosts: localhost
+  gather_facts: false
+  tasks:
+  
+    - name: hi shalom1
+      debug:
+        msg: "HALLL"
+        
