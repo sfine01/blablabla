@@ -3,8 +3,7 @@
   hosts: localhost
   gather_facts: false
   vars:
-    repo_url: "https://github.com/sfine01/blablabla.git"
-    dest_dir: "/tmp/"
+    dest_dir: "record/clusters/{{ cluster_name }}.yml"
   tasks:
 
   # Clone git repo
