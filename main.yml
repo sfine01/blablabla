@@ -5,6 +5,9 @@
   vars_files:
     - vars.yml
   tasks:
+
+  # Clone git repo
+  # set the write files as set_stat
     - name: hi shalom1
       debug:
         msg: "HALLL"
