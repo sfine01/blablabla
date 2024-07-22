@@ -1,14 +1,16 @@
 ---
-- name: hello
+- name: Set clusters activity list
   hosts: localhost
   gather_facts: false
+  vars:
+    dynamic_var_name: "{{ cluster_name }}_activities"
   vars_files:
     - "record/clusters/{{ cluster_name }}.yml"
   tasks:
 
-    - name: setfacts something
-      set_fact:
-        dynamic_var_name: "{{ cluster_name }}_activities"
+    # - name: setfacts something
+    #   set_fact:
+    #     dynamic_var_name: "{{ cluster_name }}_activities"
 
     - name: Access the dynamic variable using vars lookup
       debug:
@@ -20,6 +22,3 @@
         data:
           activity: "{{ vars[dynamic_var_name] }}"
           
-    # - name: 
-    #   debug:
-    #     msg: "{{ hostvars[cluster_name][combined_name] }}"
