@@ -33,12 +33,14 @@
     - name: Do things 2
       condition: event.dogs == "IM a dog hello hello"
       actions:
-        - debug: "HELLOOO"
+        - debug:
+            msg: "HELLOOO"
 
     - name: Do things 3
       condition: event.dogs == "IM a dog hello hello"
       actions:
-        - debug: "doing something 33"
+        - debug:
+            msg: "doing something 33"
 
 ###############################################################
 
