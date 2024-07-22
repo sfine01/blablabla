@@ -37,10 +37,10 @@
             msg: "HELLOOO"
         - set_fact:
             fact:
-              activities: "{{ activities + ['BlaBlabla1'] }}"
+              activities: "Im a var"
 
     - name: Do things 3
-      condition: event.dogs == "IM a dog hello hello"
+      condition: event.dogs == "IM a dog hello helloo"
       actions:
         - debug:
             msg: "doing something 33"
