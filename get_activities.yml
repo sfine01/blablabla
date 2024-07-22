@@ -19,9 +19,7 @@
       debug:
         msg: "{{ cluster_x_activities }}"
 
-    - name: 
-      debug:
-        msg: "{{ lookup('ansible.builtin.vars', 'combined_name' )}}"
+        
 
     - name: setfacts something
       set_fact:
