@@ -17,15 +17,11 @@
         data:
           activity: "blop blop"
           dog: "IM a dog hello hello"
+    - name: 
+      set_fact:
+        combined_name: "{{ cluster_name }}_activities"
 
-    - name: set fact
-      shell:
-        cmd: pwd
-        
-    - name: set fact
-      shell:
-        cmd: ls
         
     - name: 
       debug:
-        msg: "{{ {{ cluster_name }}_activities }}"
+        msg: "{{ combined_name }}"
