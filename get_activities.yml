@@ -2,18 +2,13 @@
 - name: hello
   hosts: localhost
   gather_facts: false
-  vars:
-    combined_name: "{{ cluster_name }}_activities"
   vars_files:
     - "record/clusters/{{ cluster_name }}.yml"
   tasks:
 
   # Clone git repo
   # set the write files as set_stat
-    - name: hi shalom1
-      debug:
-        msg: "HALLL"
-        
+
     - name: set fact
       ansible.builtin.set_stats:
         data:
@@ -28,6 +23,13 @@
       debug:
         msg: "{{ lookup('ansible.builtin.vars', 'combined_name' )}}"
 
+    - name: setfacts something
+      set_fact:
+        dynamic_var_name: "{{ cluster_name }}_activities"
+
+    - name: Access the dynamic variable using vars lookup
+      debug:
+        msg: "{{ vars[dynamic_var_name] }}"
         
     # - name: 
     #   debug:
