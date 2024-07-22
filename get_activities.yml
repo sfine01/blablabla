@@ -24,4 +24,4 @@
         
     - name: 
       debug:
-        msg: "{{ combined_name }}"
+        msg: "{{ {{ combined_name }} }}"
