@@ -28,7 +28,7 @@
           name: copy_all_the_files
           organization: Default
           
-    - name: prints something2 # This needs to be activity
+    - name: prints something2 
       condition: event.dogs == "IM a dog hello hello"
       action:
         print_event:
