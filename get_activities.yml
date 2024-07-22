@@ -4,6 +4,7 @@
   gather_facts: false
   vars:
     dest_dir: "record/clusters/{{ cluster_name }}.yml"
+    combined_name: "{{ cluster_name }}_activities"
   tasks:
 
   # Clone git repo
@@ -17,11 +18,16 @@
         data:
           activity: "blop blop"
           dog: "IM a dog hello hello"
-    - name: 
-      set_fact:
-        combined_name: "{{ cluster_name }}_activities"
-
         
     - name: 
       debug:
-        msg: "{{ hostvars[cluster_name][combined_name] }}"
+        msg: "{{ cluster_x_activities }}"
+
+    - name: 
+      debug:
+        msg: "{{ combined_name }}"
+
+        
+    # - name: 
+    #   debug:
+    #     msg: "{{ hostvars[cluster_name][combined_name] }}"
