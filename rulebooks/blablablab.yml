@@ -23,16 +23,17 @@
           
 ###############################################################
 
-    - name: Do some shit
+    - name: Do things 1
       condition: event.dog == "IM a dog hello hello"
       action:
         run_job_template:
           name: copy_all_the_files
           organization: Default
           
-    - name: prints something2 
+    - name: Do things 2
       condition: event.dogs == "IM a dog hello hello"
       action:
         print_event:
-        
+
+###############################################################
 
