@@ -20,6 +20,6 @@
     - name: Set artifacts
       ansible.builtin.set_stats:
         data:
-          activities: "{{ vars[dynamic_var_name] | default([]) }}"
+          '{ "{{ dynamic_var_name }}": "{{ vars[dynamic_var_name] | default([]) }}" }'
       ignore_errors: yes
           
