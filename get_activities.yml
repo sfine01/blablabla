@@ -15,12 +15,10 @@
     - name: Print before setting artifacts
       debug:
         msg: "{{ vars[dynamic_var_name] | default('No activities found') }}"
-      ignore_errors: yes
 
     - name: Set artifacts
       ansible.builtin.set_stats:
         data:
           "{{ dynamic_var_name }}": "{{ vars[dynamic_var_name] | default([]) }}" 
           dogs: "IM a dog hello hello"
-      ignore_errors: yes
           
