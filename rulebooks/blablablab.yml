@@ -10,12 +10,9 @@
         data_host_path: labels.instance
         data_path_separator: .
         skip_original_data: true
-
-
-
+        
   rules:
-
-
+  
     - name: Get clusters activity list
       condition: event.alert.labels.alertname == "ClusterUp"
       action:
@@ -40,8 +37,4 @@
       action:
         print_event:
         
-##############################################################
-    # - name: update activity files 
-    #   condition: event.dog == "IM a dog hello hello"
-    #   action:
-    #     print_event:
+
