@@ -3,7 +3,7 @@
   hosts: localhost
   vars:
     cluster_name: "example_cluster2"  # Default value, should be overridden
-    activity_names: ["example_activity1", "example_activity2"]  # Default values, should be overridden
+    activity_names: ["example_activity12", "example_activity22"]  # Default values, should be overridden
     time: "2024-07-23"  # Default value, should be overridden
     
     activities_path: "records/activities/"
