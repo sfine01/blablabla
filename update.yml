@@ -29,8 +29,8 @@
         marker: ""
         create: no
         block: |
-              - name: {{ item }}
-                {{ time }}
+          {{ '- name: ' ~ item | indent(6, True) }}
+          {{ time | indent(6) }}
       loop: "{{ activity_names }}"
     - name:
       shell: cat "records/clusters/{{ cluster_name }}.yml"
