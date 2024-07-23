@@ -15,7 +15,7 @@
       register: cluster_file_status
       
     - name: Check if activity file exists
-      deubg:
+      debug:
         msg: "{{ cluster_file_status }}"
 
     # - name: Decode existing entries
