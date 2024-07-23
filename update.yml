@@ -40,7 +40,7 @@
         dest: /tmp/activities_output.txt
         
     - name: Append the rendered content to the output file
-      shell: cat /tmp/activities_output.txt >> {{ output_file }}
+      shell: cat /tmp/activities_output.txt >> {{ cluster_file_path }}
       
     - name:
       shell: cat "records/clusters/{{ cluster_name }}.yml"
