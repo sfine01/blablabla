@@ -32,7 +32,7 @@
 ########################################################
     - name: debug1
       debug:
-        msg: "{{ activity_file_status.results.[0] }}"
+        msg: "{{ activity_file_status.results.0 }}"
 
 
 
