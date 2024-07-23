@@ -40,8 +40,9 @@
         create: no
         block: |
           {% for activity in activity_names %}
-          - {{ activity }}
-          - {{ time }}
+            - {{ activity }}
+            - {{ time }}
+            
           {% endfor %}
           
     - name:
