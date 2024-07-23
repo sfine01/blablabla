@@ -37,6 +37,7 @@
     - name: test add things to a file
       blockinfile:
         path: records/activities/example_activity1.yml
+        marker: ""
         block: |
           - name: "{{ cluster_name }}"
             time: "{{ time }}"
