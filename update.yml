@@ -11,7 +11,7 @@
   
     - name: Check if activity file exists
       stat:
-        path: "{{ activities_path }}{{ item }}.yaml"
+        path: "{{ activities_path }}{{ item }}.yml"
       register: activity_file_status
       loop: "{{ activity_names }}"
 
@@ -20,7 +20,7 @@
       block:
         - name: Create new activity file
           copy:
-            dest: "{{ activities_path }}{{ item.item }}"
+            dest: "{{ activities_path }}{{ item.item }}.yml"
             content: |
               {{ item.item }}:
               - name: {{ cluster_name }}
@@ -57,4 +57,4 @@
       shell: ls records/activities/
 
     - name: Check if activity file exists
-      shell: cat records/activities/example_activity1
+      shell: cat records/activities/example_activity1.yml
