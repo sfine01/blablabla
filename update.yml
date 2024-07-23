@@ -19,7 +19,6 @@
     - name: Create cluster type file
       blockinfile:
         path: "{{ cluster_file_path }}"
-        marker: ""
         create: true
         marker: ""
         block: |
