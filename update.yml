@@ -34,10 +34,13 @@
     #       {{ '- name: ' ~ item | indent(6, True) }}
     #       {{ time | indent(6) }}
     #   loop: "{{ activity_names }}"
-    
-    - name: Append activities to file
-      shell: "echo - name: {{ item }}\n  time: {{ time }} >> {{ cluster_file_path }}"
-      loop: "{{ activity_names }}"
+    - name: Render the Jinja2 template to a temporary file
+      template:
+        src: activities_template.j2
+        dest: /tmp/activities_output.txt
+        
+    - name: Append the rendered content to the output file
+      shell: cat /tmp/activities_output.txt >> {{ output_file }}
       
     - name:
       shell: cat "records/clusters/{{ cluster_name }}.yml"
