@@ -32,12 +32,8 @@
 ########################################################
     - name: debug1
       debug:
-        msg: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
-        
-    - name: debug2
-      debug:
-        msg: "{{ item.item }}"
-      loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
+        msg: "{{ activity_file_status.results }}"
+
 
 
 
