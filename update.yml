@@ -5,54 +5,37 @@
     cluster_name: "example_cluster2"  # Default value, should be overridden
     activity_names: ["example_activity1", "example_activity2"]  # Default values, should be overridden
     time: "2024-07-22T12:00:00Z"  # Default value, should be overridden
+    
     activities_path: "records/activities/"
+    cluster_file_path: "records/{{ cluster_name }}.yml"
   
   tasks:
   
     - name: Check if activity file exists
       stat:
-        path: "records/{{ cluster_name }}.yml"
+        path: "{{ cluster_file_path }}"
       register: cluster_file_status
-      
-    - name: Check if activity file exists
-      debug:
-        msg: "{{ cluster_file_status }}"
 
-
-    - name: print this when file is not present
-      debug:
-        msg: "file is not present blablabla"
+    - name: Create cluster type file
+      blockinfile:
+        path: "{{ cluster_file_path }}"
+        marker: ""
+        block: |
+          {{ cluster_name}}:
       when: cluster_file_status.stat.exists == false
-
-    - name: print present
-      debug:
-        msg: "file is presentttttttttttttt"
-      when: cluster_file_status.stat.exists == true
-
-      
-    # - name: Decode existing entries
-    #   set_fact:
-    #     existing_entries_content: "{{ existing_entries.content | b64decode | from_yaml | default({}) }}"
-
-    # - name: Generate content for Type1 file
-    #   template:
-    #     src: templates/type1.j2
-    #     dest: "{{ type1_file }}"
-    #     force: no
-    #   when: existing_entries_content is undefined or existing_entries_content == {}
-
-    # - name: Append new activities to Type1 file
-    #   blockinfile:
-    #     path: "{{ type1_file }}"
-    #     create: no
-    #     block: |
-    #       {% for activity in activity_names %}
-    #         {% if activity not in existing_entries_content %}
-    #       - {{ activity }}
-    #       - {{ time }}
-    #         {% endif %}
-    #       {% endfor %}
-
+    
+    - name: Append new activities to Type1 file
+      blockinfile:
+        path: "{{ cluster_file_path }}"
+        create: no
+        block: |
+          {% for activity in activity_names %}
+          - {{ activity }}
+          - {{ time }}
+          {% endfor %}
+          
+    - name:
+      shell: cat "records/{{ cluster_name }}.yml"
 ################################# 
 
     # - name: Check if activity file exists
