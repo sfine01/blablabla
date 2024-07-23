@@ -46,6 +46,20 @@
           
     - name:
       shell: cat "records/clusters/{{ cluster_name }}.yml"
+      
+    - name: Append new activities to Type1 file
+      blockinfile:
+        path: "{{ cluster_file_path }}"
+        marker: ""
+        create: no
+        block: |
+          {% for activity in activity_names %}
+            - name: {{ activity }}
+              {{ time }}
+          {% endfor %}
+          
+    - name:
+      shell: cat "records/clusters/{{ cluster_name }}.yml"
 ################################# 
 
     # - name: Check if activity file exists
