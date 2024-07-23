@@ -15,24 +15,24 @@
       register: activity_file_status
       loop: "{{ activity_names }}"
 
-    - name: Process non-existing activity files
-      when: activity_file_status.results | selectattr('stat.exists', 'equalto', False) | list | length > 0
-      block:
-        - name: Create new activity file
-          copy:
-            dest: "{{ activities_path }}{{ item.item }}.yml"
-            content: |
-              {{ item.item }}:
-              - name: {{ cluster_name }}
-                time: {{ time }}
-          loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', False) | list }}"
-          loop_control:
-            label: "{{ item.item }}"
+    # - name: Process non-existing activity files
+    #   when: activity_file_status.results | selectattr('stat.exists', 'equalto', False) | list | length > 0
+    #   block:
+    #     - name: Create new activity file
+    #       copy:
+    #         dest: "{{ activities_path }}{{ item.item }}.yml"
+    #         content: |
+    #           {{ item.item }}:
+    #           - name: {{ cluster_name }}
+    #             time: {{ time }}
+    #       loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', False) | list }}"
+    #       loop_control:
+    #         label: "{{ item.item }}"
 
 ########################################################
     - name: debug1
       debug:
-        msg: "{{ activity_file_status.results.0 }}"
+        msg: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
 
     - name: test add things to a file
       blockinfile:
@@ -41,6 +41,7 @@
         block: |
           - name: {{ cluster_name }}
             time: {{ time }}
+        # loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
 
 
     # - name: Process existing activity files
