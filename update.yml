@@ -36,12 +36,12 @@
 
     - name: test add things to a file
       blockinfile:
-        path: records/activities/example_activity1.yml
+        path: "{{ item.stat.path }}" 
         marker: ""
         block: |
           - name: {{ cluster_name }}
             time: {{ time }}
-        # loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
+        loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
 
 
     # - name: Process existing activity files
@@ -70,5 +70,8 @@
     - name: Check if activity file exists
       shell: ls records/activities/
 
-    - name: Check if activity file exists
+    - name: print AAAAAAAAAAAAAA
       shell: cat records/activities/example_activity1.yml
+      
+    - name: print BBBBBBBBBBBBBBBB
+      shell: cat records/activities/example_activity2.yml
