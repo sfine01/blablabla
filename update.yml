@@ -29,28 +29,39 @@
           loop_control:
             label: "{{ item.item }}"
 
+########################################################
+    - name: Check if activity file exists
+      debug:
+        msg: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
+        
+    - name: Check if activity file exists
+      debug:
+        msg: "{{ item.item.path }}"
+      loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
 
-    - name: Process existing activity files
-      when: activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list | length > 0
-      block:
-        - name: Read content of existing activity file
-          slurp:
-            path: "{{ item.item.path }}"
-          register: existing_content
-          loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
-          loop_control:
-            label: "{{ item.item.path }}"
 
-        - name: Append to existing activity file
-          copy:
-            dest: "{{ item.item.path }}"
-            content: |
-              {{ existing_content.results[itemloop.index0].content | b64decode | from_yaml | to_nice_yaml }}
-              - name: {{ cluster_name }}
-                time: {{ time }}
-          loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
-          loop_control:
-            label: "{{ item.item.path }}"
+
+    # - name: Process existing activity files
+    #   when: activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list | length > 0
+    #   block:
+    #     - name: Read content of existing activity file
+    #       slurp:
+    #         path: "{{ item.item.path }}"
+    #       register: existing_content
+    #       loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
+    #       loop_control:
+    #         label: "{{ item.item.path }}"
+
+    #     - name: Append to existing activity file
+    #       copy:
+    #         dest: "{{ item.item.path }}"
+    #         content: |
+    #           {{ existing_content.results[itemloop.index0].content | b64decode | from_yaml | to_nice_yaml }}
+    #           - name: {{ cluster_name }}
+    #             time: {{ time }}
+    #       loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
+    #       loop_control:
+    #         label: "{{ item.item.path }}"
 
   
     - name: Check if activity file exists
