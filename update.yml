@@ -16,16 +16,6 @@
         path: "{{ cluster_file_path }}"
       register: cluster_file_status
 
-    # - name: Create cluster type file
-    #   blockinfile:
-    #     path: "{{ cluster_file_path }}"
-    #     create: true
-    #     marker_begin: null
-    #     marker_end: ""
-    #     block: |
-    #       {{ cluster_name}}:
-    #   when: cluster_file_status.stat.exists == false
-      
     - name: Create new activity file
       copy:
         dest: "{{ cluster_file_path }}"
@@ -46,20 +36,7 @@
           
     - name:
       shell: cat "records/clusters/{{ cluster_name }}.yml"
-      
-    - name: Append new activities to Type1 file
-      blockinfile:
-        path: "{{ cluster_file_path }}"
-        marker: ""
-        create: no
-        block: |
-          {% for activity in activity_names %}
-            - name: {{ activity }}
-              {{ time }}
-          {% endfor %}
-          
-    - name:
-      shell: cat "records/clusters/{{ cluster_name }}.yml"
+
 ################################# 
 
     # - name: Check if activity file exists
