@@ -14,7 +14,7 @@
 
 
   tasks:
-  
+  ####### Type 2 file -> ACTIVITY #######
     - name: Check files stat
       stat:
         path: "{{ activity_directory }}/{{ item }}.yml"
@@ -22,3 +22,7 @@
       loop: "{{ activity_names }}"
       loop_control:
         loop_var: item
+        
+    - name: print output
+      debug:
+        var: files_stats
