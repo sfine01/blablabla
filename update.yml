@@ -55,3 +55,6 @@
   
     - name: Check if activity file exists
       shell: ls records/activities/
+
+    - name: Check if activity file exists
+      shell: cat records/activities/example_activity1
