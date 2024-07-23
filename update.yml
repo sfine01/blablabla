@@ -18,6 +18,17 @@
       debug:
         msg: "{{ cluster_file_status }}"
 
+    - name: print this when file is not present
+      debug:
+        msg: "file is not present blablabla"
+      when: cluster_file_status.result.stat.exists == "false"
+
+    - name: print this when file is not present
+      debug:
+        msg: "file is presentttttttttttttt"
+      when: cluster_file_status.result.stat.exists == "true"
+
+      
     # - name: Decode existing entries
     #   set_fact:
     #     existing_entries_content: "{{ existing_entries.content | b64decode | from_yaml | default({}) }}"
