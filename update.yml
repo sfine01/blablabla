@@ -45,9 +45,7 @@
         block: |
           - name: {{ cluster_name }}
             time: {{ time }}
-        loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list}}"
-        loop_control:
-          label: "{{ item.stat.path }}"
+        loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
 
 
     # - name: Process existing activity files
