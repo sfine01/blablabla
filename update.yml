@@ -9,35 +9,45 @@
   
   tasks:
   
-    - name: Check if activity files exists
+    - name: Check if activity file exists
       stat:
         path: "{{ activities_path }}{{ item }}.yaml"
       register: activity_file_status
       loop: "{{ activity_names }}"
-    
-    - name: Update or create activity file
+
+    - name: Process non-existing activity files
+      when: activity_file_status.results | selectattr('stat.exists', 'equalto', False) | list | length > 0
       block:
-        - name: Read existing activity file
+        - name: Create new activity file
+          copy:
+            dest: "{{ activities_path }}{{ item.item }}"
+            content: |
+              {{ item.item }}:
+              - name: {{ cluster_name }}
+                time: {{ time }}
+          loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', False) | list }}"
+          loop_control:
+            label: "{{ item.item }}"
+
+
+    - name: Process existing activity files
+      when: activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list | length > 0
+      block:
+        - name: Read content of existing activity file
           slurp:
-            path: "{{ activities_path }}{{ item }}.yaml"
+            path: "{{ item.item.path }}"
           register: existing_content
-          when: activity_file_status.results[itemloop.index0].stat.exists
+          loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
+          loop_control:
+            label: "{{ item.item.path }}"
 
         - name: Append to existing activity file
           copy:
-            dest: "{{ activities_path }}{{ item }}.yaml"
+            dest: "{{ item.item.path }}"
             content: |
-              {{ existing_content.content | b64decode | from_yaml | to_nice_yaml }}
+              {{ existing_content.results[itemloop.index0].content | b64decode | from_yaml | to_nice_yaml }}
               - name: {{ cluster_name }}
                 time: {{ time }}
-          when: activity_file_status.results[itemloop.index0].stat.exists
-
-        - name: Create new activity file
-          copy:
-            dest: "{{ activities_path }}{{ item }}.yaml"
-            content: |
-              {{ item }}:
-              - name: {{ cluster_name }}
-                time: {{ time }}
-          when: not activity_file_status.results[itemloop.index0].stat.exists
-      loop: "{{ activity_names }}"
+          loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
+          loop_control:
+            label: "{{ item.item.path }}"
