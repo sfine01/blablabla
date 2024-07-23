@@ -39,8 +39,8 @@
         path: records/activities/example_activity1.yml
         marker: ""
         block: |
-          - name: "{{ cluster_name }}"
-            time: "{{ time }}"
+          - name: {{ cluster_name }}
+            time: {{ time }}
 
 
     # - name: Process existing activity files
