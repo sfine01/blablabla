@@ -7,7 +7,7 @@
     time: "2024-07-22T12:00:00Z"  # Default value, should be overridden
     
     activities_path: "records/activities/"
-    cluster_file_path: "records/{{ cluster_name }}.yml"
+    cluster_file_path: "records/clusters/{{ cluster_name }}.yml"
   
   tasks:
   
@@ -46,7 +46,7 @@
           {% endfor %}
           
     - name:
-      shell: cat "records/{{ cluster_name }}.yml"
+      shell: cat "records/clusters/{{ cluster_name }}.yml"
 ################################# 
 
     # - name: Check if activity file exists
