@@ -1,15 +1,24 @@
 ---
-- name: hello
+- name: Manage cluster and activity files
   hosts: localhost
-  gather_facts: false
-  vars_files:
-    - vars.yml
+  vars:
+    cluster_name: "example_cluster"  # Default value, should be overridden
+    activity_names: ["example_activity1", "example_activity2"]  # Default values, should be overridden
+    time: "2024-07-22T12:00:00Z"  # Default value, should be overridden
+
+    base_directory: "./records"
+    cluster_directory: "{{ base_directory }}/clusters"
+    activity_directory: "{{ base_directory }}/activities"
+
+    type1_file: "{{ cluster_directory }}/{{ cluster_name }}.yml"
+
+
   tasks:
-
-  # Clone git repo
-  # set the write files as set_stat
-  # deal wit the following options 
-   # 1. files are not present 
-   # 2. files are presnt
-   # 3. somefile are present :)
-
+  
+    - name: Check files stat
+      stat:
+        path: "{{ activity_directory }}/{{ item }}.yml"
+      register: files_stats
+      loop: "{{ activity_names }}"
+      loop_control:
+        loop_var: item
