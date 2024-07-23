@@ -19,6 +19,7 @@
     - name: Create cluster type file
       blockinfile:
         path: "{{ cluster_file_path }}"
+        marker: ""
         create: true
         marker: ""
         block: |
@@ -28,6 +29,7 @@
     - name: Append new activities to Type1 file
       blockinfile:
         path: "{{ cluster_file_path }}"
+        marker: ""
         create: no
         block: |
           {% for activity in activity_names %}
