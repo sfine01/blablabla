@@ -23,15 +23,21 @@
           {{ cluster_name}}:
       when: cluster_file_status.stat.exists == false
     
-    - name: Append new activities to Type1 file
-      blockinfile:
-        path: "{{ cluster_file_path }}"
-        marker: ""
-        create: no
-        block: |
-          {{ '- name: ' ~ item | indent(6, True) }}
-          {{ time | indent(6) }}
+    - name:
+      shell: cat "records/clusters/{{ cluster_name }}.yml"
+    # - name: Append new activities to Type1 file
+    #   blockinfile:
+    #     path: "{{ cluster_file_path }}"
+    #     marker: ""
+    #     create: no
+    #     block: |
+    #       {{ '- name: ' ~ item | indent(6, True) }}
+    #       {{ time | indent(6) }}
+    #   loop: "{{ activity_names }}"
+    - name: Append activities to file
+      shell: echo "- name: {{ item }}\n  time: {{ time }}" >> {{ cluster_file_path }}
       loop: "{{ activity_names }}"
+      
     - name:
       shell: cat "records/clusters/{{ cluster_name }}.yml"
 
