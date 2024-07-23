@@ -64,10 +64,10 @@
       loop_control:
         label: "{{ item.stat.path }}"
         
-    - name: test add things to a file
+    - name: printthings
       shell: cat "{{ activities_path }}/{{ item }}.yml"
       loop: "{{ activity_names }}"
       
-    - name: test add things to a file
-      shell: ls "{{ activities_path }}
+    - name: more things to print
+      shell: ls "{{ activities_path }}"
 
