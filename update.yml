@@ -11,9 +11,43 @@
   
     - name: Check if activity file exists
       stat:
-        path: "{{ activities_path }}{{ item }}.yml"
-      register: activity_file_status
-      loop: "{{ activity_names }}"
+        path: "records/{{ cluster_name }}.yml"
+      register: cluster_file_status
+      
+    - name: Check if activity file exists
+      deubg:
+        msg: "{{ cluster_file_status }}"
+
+    # - name: Decode existing entries
+    #   set_fact:
+    #     existing_entries_content: "{{ existing_entries.content | b64decode | from_yaml | default({}) }}"
+
+    # - name: Generate content for Type1 file
+    #   template:
+    #     src: templates/type1.j2
+    #     dest: "{{ type1_file }}"
+    #     force: no
+    #   when: existing_entries_content is undefined or existing_entries_content == {}
+
+    # - name: Append new activities to Type1 file
+    #   blockinfile:
+    #     path: "{{ type1_file }}"
+    #     create: no
+    #     block: |
+    #       {% for activity in activity_names %}
+    #         {% if activity not in existing_entries_content %}
+    #       - {{ activity }}
+    #       - {{ time }}
+    #         {% endif %}
+    #       {% endfor %}
+
+################################# 
+
+    # - name: Check if activity file exists
+    #   stat:
+    #     path: "{{ activities_path }}{{ item }}.yml"
+    #   register: activity_file_status
+    #   loop: "{{ activity_names }}"
 
     # - name: Process non-existing activity files
     #   when: activity_file_status.results | selectattr('stat.exists', 'equalto', False) | list | length > 0
@@ -29,53 +63,13 @@
     #       loop_control:
     #         label: "{{ item.item }}"
 
-########################################################
-    - name: debug1
-      debug:
-        msg: "{{ item.stat.path  }}"
-      loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
-      loop_control:
-        label: "{{ item.stat.path }}"
-      
-
-    - name: test add things to a file
-      blockinfile:
-        path: "{{ item.stat.path }}" 
-        marker: ""
-        block: |
-          - name: {{ cluster_name }}
-            time: {{ time }}
-      loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
-      loop_control:
-        label: "{{ item.stat.path }}"
-    # - name: Process existing activity files
-    #   when: activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list | length > 0
-    #   block:
-    #     - name: Read content of existing activity file
-    #       slurp:
-    #         path: "{{ item.item.path }}"
-    #       register: existing_content
-    #       loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
-    #       loop_control:
-    #         label: "{{ item.item.path }}"
-
-    #     - name: Append to existing activity file
-    #       copy:
-    #         dest: "{{ item.item.path }}"
-    #         content: |
-    #           {{ existing_content.results[itemloop.index0].content | b64decode | from_yaml | to_nice_yaml }}
-    #           - name: {{ cluster_name }}
-    #             time: {{ time }}
-    #       loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
-    #       loop_control:
-    #         label: "{{ item.item.path }}"
-
-  
-    - name: Check if activity file exists
-      shell: ls records/activities/
-
-    - name: print AAAAAAAAAAAAAA
-      shell: cat records/activities/example_activity1.yml
-      
-    - name: print BBBBBBBBBBBBBBBB
-      shell: cat records/activities/example_activity2.yml
+    # - name: test add things to a file
+    #   blockinfile:
+    #     path: "{{ item.stat.path }}" 
+    #     marker: ""
+    #     block: |
+    #       - name: {{ cluster_name }}
+    #         time: {{ time }}
+    #   loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
+    #   loop_control:
+    #     label: "{{ item.stat.path }}"
