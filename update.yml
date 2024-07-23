@@ -4,7 +4,7 @@
   vars:
     cluster_name: "example_cluster2"  # Default value, should be overridden
     activity_names: ["example_activity1", "example_activity2"]  # Default values, should be overridden
-    time: "2024-07-22"  # Default value, should be overridden
+    time: "2024-07-23"  # Default value, should be overridden
     
     activities_path: "records/activities/"
     cluster_file_path: "records/clusters/{{ cluster_name }}.yml"
@@ -29,11 +29,9 @@
         marker: ""
         create: no
         block: |
-          {% for activity in activity_names %}
-            - name: {{ activity }}
+            - name: {{ item }}
               {{ time }}
-          {% endfor %}
-          
+      loop: "{{ activity_names }}"
     - name:
       shell: cat "records/clusters/{{ cluster_name }}.yml"
 
