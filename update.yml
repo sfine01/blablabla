@@ -51,3 +51,7 @@
           loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
           loop_control:
             label: "{{ item.item.path }}"
+
+  
+    - name: Check if activity file exists
+      shell: ls records/activities/
