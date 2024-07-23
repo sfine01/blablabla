@@ -33,7 +33,7 @@
     - name: debug1
       debug:
         msg: "{{ item.stat.path  }}"
-      loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
+      loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) }}"
       loop_control:
         label: "{{ item.stat.path }}"
       
