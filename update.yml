@@ -18,15 +18,16 @@
       debug:
         msg: "{{ cluster_file_status }}"
 
-    - name: print this when file is not present
-      debug:
-        msg: "file is not present blablabla"
-      when: cluster_file_status.stat.exists == "false"
 
     - name: print this when file is not present
       debug:
+        msg: "file is not present blablabla"
+      when: cluster_file_status.stat.exists == false
+
+    - name: print present
+      debug:
         msg: "file is presentttttttttttttt"
-      when: cluster_file_status.stat.exists == "true"
+      when: cluster_file_status.stat.exists == true
 
       
     # - name: Decode existing entries
