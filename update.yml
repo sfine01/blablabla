@@ -1,28 +1,43 @@
 ---
-- name: Manage cluster and activity files
+- name: Check and update activity files
   hosts: localhost
   vars:
     cluster_name: "example_cluster"  # Default value, should be overridden
     activity_names: ["example_activity1", "example_activity2"]  # Default values, should be overridden
     time: "2024-07-22T12:00:00Z"  # Default value, should be overridden
-
-    base_directory: "./records"
-    cluster_directory: "{{ base_directory }}/clusters"
-    activity_directory: "{{ base_directory }}/activities"
-
-    type1_file: "{{ cluster_directory }}/{{ cluster_name }}.yml"
-
-
+    activities_path: "/records/activities/"
+  
   tasks:
-  ####### Type 2 file -> ACTIVITY #######
-    - name: Check files stat
+  
+    - name: Check if activity files exists
       stat:
-        path: "{{ activity_directory }}/{{ item }}.yml"
-      register: files_stats
+        path: "{{ activities_path }}{{ item }}.yaml"
+      register: activity_file_status
       loop: "{{ activity_names }}"
-      loop_control:
-        loop_var: item
-        
-    - name: print output
-      debug:
-        var: files_stats
+    
+    - name: Update or create activity file
+      block:
+        - name: Read existing activity file
+          slurp:
+            path: "{{ activities_path }}{{ item }}.yaml"
+          register: existing_content
+          when: activity_file_status.results[itemloop.index0].stat.exists
+
+        - name: Append to existing activity file
+          copy:
+            dest: "{{ activities_path }}{{ item }}.yaml"
+            content: |
+              {{ existing_content.content | b64decode | from_yaml | to_nice_yaml }}
+              - name: {{ cluster_name }}
+                time: {{ time }}
+          when: activity_file_status.results[itemloop.index0].stat.exists
+
+        - name: Create new activity file
+          copy:
+            dest: "{{ activities_path }}{{ item }}.yaml"
+            content: |
+              {{ item }}:
+              - name: {{ cluster_name }}
+                time: {{ time }}
+          when: not activity_file_status.results[itemloop.index0].stat.exists
+      loop: "{{ activity_names }}"
