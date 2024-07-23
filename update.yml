@@ -20,7 +20,8 @@
       blockinfile:
         path: "{{ cluster_file_path }}"
         create: true
-        marker: ""
+        marker_begin: null
+        marker_end: ""
         block: |
           {{ cluster_name}}:
       when: cluster_file_status.stat.exists == false
