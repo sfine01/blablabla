@@ -42,7 +42,6 @@
           {% for activity in activity_names %}
             - name: {{ activity }}
               {{ time }}
-            
           {% endfor %}
           
     - name:
