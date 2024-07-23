@@ -30,11 +30,11 @@
             label: "{{ item.item }}"
 
 ########################################################
-    - name: Check if activity file exists
+    - name: debug1
       debug:
         msg: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
         
-    - name: Check if activity file exists
+    - name: debug2
       debug:
         msg: "{{ item.item.path }}"
       loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
