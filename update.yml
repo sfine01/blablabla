@@ -36,7 +36,7 @@
     #   loop: "{{ activity_names }}"
     
     - name: Append activities to file
-      shell: 'echo "- name: {{ item }}\n  time: {{ time }}" >> "{{ cluster_file_path }}"'
+      shell: "echo - name: {{ item }}\n  time: {{ time }} >> {{ cluster_file_path }}"
       loop: "{{ activity_names }}"
       
     - name:
