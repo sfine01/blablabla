@@ -32,7 +32,10 @@
 ########################################################
     - name: debug1
       debug:
-        msg: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
+        msg: "{{ item.stat.path  }}"
+      loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
+        label: "{{ item.stat.path }}"
+      
 
     - name: test add things to a file
       blockinfile:
@@ -42,6 +45,7 @@
           - name: {{ cluster_name }}
             time: {{ time }}
         loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
+          label: "{{ item.stat.path }}"
 
 
     # - name: Process existing activity files
