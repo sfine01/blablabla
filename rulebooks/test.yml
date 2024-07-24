@@ -24,8 +24,8 @@
         - run_job_template:
             name: copy_all_the_files
             organization: Default
-        - set_fact:
-            fact:
+        - post_event:
+            event:
               blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: "hallo"
 
 
