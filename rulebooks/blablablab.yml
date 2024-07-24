@@ -45,19 +45,17 @@
         - debug:
             msg: "doing something 33"
 
-    - name: print things list
-      condition: event.meta is defined
-      action:
-        debug:
-          msg: "{{ facts.activities }}"
+    # - name: print things list
+    #   condition: event.meta is defined
+    #   action:
+    #     debug:
+    #       msg: "{{ facts.activities }}"
 
 ###############################################################
 
-    # - name: Update record files
-    #   condition: event.fact is defined
-    #   action:
-    #     run_job_template:
-    #       name: mynameisshay
-    #       organization: Default
-    #       post_events: true
-    #       job_args: # pass here the set facts I have defined
+    - name: Update record files
+      condition: event.meta is defined
+      action:
+        run_job_template:
+          name: mynameisshay
+          organization: Default
