@@ -71,8 +71,7 @@
         path: "{{ item.stat.path }}" 
         marker: ""
         block: |
-          {{ "- name: " + cluster_name | indent(2, True) }}
-          {{ "time: " + time | indent(2, True) }}
+          {{ "- name: " + cluster_name + "\n  time: " + time | indent(2, True) }}
       loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
       loop_control:
         label: "{{ item.stat.path }}"
