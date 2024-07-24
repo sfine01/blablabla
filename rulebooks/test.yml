@@ -26,7 +26,17 @@
             organization: Default
         - post_event:
             event:
-              blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: "hallo"
+              blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: [ "hallo" ]
+
+    - name: Do things 1
+      condition: event.dogs == 'IM a dog hello hello'
+      actions:
+        - run_job_template:
+            name: copy_all_the_files
+            organization: Default
+        - post_event:
+            event:
+               blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: "{{ event.blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa }} + ['plz plz plz plzzz']"
 
 
 
