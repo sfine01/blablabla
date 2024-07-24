@@ -39,4 +39,4 @@
                blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: "{{ events.blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa }} + ['plz plz plz plzzz']"
         - debug:
             msg:
-              "{{ events }}"
+              "{{ event }}"
