@@ -51,7 +51,7 @@
         #       activities: "{{ activities | default([]) + ['nahanahanah'] }}"
 
     - name: print things list
-      condition: event.dogs == "IM a dog hello hello"
+      condition: event.cats == "IM a Cat"
       action:
         debug:
 
