@@ -59,5 +59,7 @@
       condition: event.meta is defined
       action:
         run_job_template:
-          name: mynameisshay
+          name: plzzzzzzzzzzzzzzzzzzzzzzzzzz
           organization: Default
+          job_args:
+            shay: fine
