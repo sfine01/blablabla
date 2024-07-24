@@ -29,34 +29,12 @@
         - run_job_template:
             name: copy_all_the_files
             organization: Default
-          
-    - name: Do things 2
-      condition: event.dogs == "IM a dog hello hello"
-      actions:
-        - debug:
-            msg: "HELLOOO"
-        - post_event:
-            event:
-              activities: ["blablabla"]
 
-    - name: Do things 3
-      condition: event.dogs == "IM a dog hello hello"
-      actions:
-        - debug:
-            msg: "HELLOOO"
-        - post_event:
-            event:
-              activities: 
-    # - name: print things list
-    #   condition: event.meta is defined
-    #   action:
-    #     debug:
-    #       msg: "{{ facts.activities }}"
 
 ###############################################################
 
     - name: Update record files
-      condition: event.meta is defined
+      condition: event.somthing is defined
       action:
         run_job_template:
           name: plzzzzzzzzzzzzzzzzzzzzzzzzzz
