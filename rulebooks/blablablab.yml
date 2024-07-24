@@ -37,7 +37,7 @@
             msg: "HELLOOO"
         - post_event:
             event:
-              activities: "bla bla bla"
+              activities: ["blablabla"]
 
     - name: Do things 3
       condition: event.dogs == "IM a dog hello hello"
@@ -46,7 +46,7 @@
             msg: "HELLOOO"
         - post_event:
             event:
-              haloooooooooooooooooooooooooooooooooooooooooooooooooooooooo: "bla bla bla"
+              activities: 
     # - name: print things list
     #   condition: event.meta is defined
     #   action:
