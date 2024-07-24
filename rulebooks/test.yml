@@ -28,7 +28,7 @@
             event:
               blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: [ "hallo" ]
 
-    - name: Do things 1
+    - name: Do things 2
       condition: event.dogs == 'IM a dog hello hello'
       actions:
         - run_job_template:
