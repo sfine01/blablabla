@@ -68,7 +68,7 @@
     
     - name: Render the Jinja2 template to a temporary file
       template:
-        src: templates/add_cluster.j2
+        src: templates/add_activity.j2
         dest: "/tmp/{{ item.item }}.yml"
       loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
       loop_control:
