@@ -37,10 +37,6 @@
         - post_event:
             event:
                blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: "{{ events.blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa }} + ['plz plz plz plzzz']"
-
-
-
-    - name: Set fact
-      condition: event.meta is defined
-      action:
-        debug:
+        - debug:
+            msg:
+              "{{ events }}"
