@@ -48,7 +48,8 @@
     - name: print things list
       condition: event.meta is defined
       action:
-        debug: "{{ fact.activities }}"
+        debug:
+          msg: "{{ fact.activities }}"
 
 ###############################################################
 
