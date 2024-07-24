@@ -11,63 +11,66 @@
   
   tasks:
   
-    # - name: Check if activity file exists
-    #   stat:
-    #     path: "{{ cluster_file_path }}"
-    #   register: cluster_file_status
+    - name: Check if cluster if exists
+      stat:
+        path: "{{ cluster_file_path }}"
+      register: cluster_file_status
 
-    # - name: Create new activity file
-    #   copy:
-    #     dest: "{{ cluster_file_path }}"
-    #     content: |
-    #       {{ cluster_name}}:
-    #   when: cluster_file_status.stat.exists == false
+    - name: Create new activity file
+      copy:
+        dest: "{{ cluster_file_path }}"
+        content: |
+          {{ cluster_name}}:
+      when: cluster_file_status.stat.exists == false
 
-    # - name: Render the Jinja2 template to a temporary file
-    #   template:
-    #     src: templates/add_cluster.j2
-    #     dest: /tmp/activities_output.txt
+    - name: Render the Jinja2 template to a temporary file
+      template:
+        src: templates/add_cluster.j2
+        dest: /tmp/activities_output.txt
         
-    # - name: Append the rendered content to the output file
-    #   shell: cat /tmp/activities_output.txt >> {{ cluster_file_path }}
+    - name: Append the rendered content to the output file
+      shell: cat /tmp/activities_output.txt >> {{ cluster_file_path }}
+      
+    - name: AAp
+      shell: cat {{ cluster_file_path }}
 
 ################################# 
 
-    - name: Check if activity file exists
-      stat:
-        path: "{{ activities_path }}{{ item }}.yml"
-      register: activity_file_status
-      loop: "{{ activity_names }}"
+    # - name: Check if activity file exists
+    #   stat:
+    #     path: "{{ activities_path }}{{ item }}.yml"
+    #   register: activity_file_status
+    #   loop: "{{ activity_names }}"
 
-    - name: Process non-existing activity files
-      when: activity_file_status.results | selectattr('stat.exists', 'equalto', False) | list | length > 0
-      block:
-        - name: Create new activity file
-          copy:
-            dest: "{{ activities_path }}{{ item.item }}.yml"
-            content: |
-              {{ item.item }}:
-              - name: {{ cluster_name }}
-                time: {{ time }}
-          loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', False) | list }}"
-          loop_control:
-            label: "{{ item.item }}"
+    # - name: Process non-existing activity files
+    #   when: activity_file_status.results | selectattr('stat.exists', 'equalto', False) | list | length > 0
+    #   block:
+    #     - name: Create new activity file
+    #       copy:
+    #         dest: "{{ activities_path }}{{ item.item }}.yml"
+    #         content: |
+    #           {{ item.item }}:
+    #           - name: {{ cluster_name }}
+    #             time: {{ time }}
+    #       loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', False) | list }}"
+    #       loop_control:
+    #         label: "{{ item.item }}"
 
-    - name: test add things to a file
-      blockinfile:
-        path: "{{ item.stat.path }}" 
-        marker: ""
-        block: |
-          - name: {{ cluster_name }}
-            time: {{ time }}
-      loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
-      loop_control:
-        label: "{{ item.stat.path }}"
+    # - name: test add things to a file
+    #   blockinfile:
+    #     path: "{{ item.stat.path }}" 
+    #     marker: ""
+    #     block: |
+    #       - name: {{ cluster_name }}
+    #         time: {{ time }}
+    #   loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
+    #   loop_control:
+    #     label: "{{ item.stat.path }}"
         
-    - name: printthings
-      shell: cat "{{ activities_path }}/{{ item }}.yml"
-      loop: "{{ activity_names }}"
+    # - name: printthings
+    #   shell: cat "{{ activities_path }}/{{ item }}.yml"
+    #   loop: "{{ activity_names }}"
       
-    - name: more things to print
-      shell: ls "{{ activities_path }}"
+    # - name: more things to print
+    #   shell: ls "{{ activities_path }}"
 
