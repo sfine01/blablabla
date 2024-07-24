@@ -48,6 +48,7 @@
             dest: "{{ activities_path }}{{ item.item }}.yml"
             content: |
               {{ item.item }}:
+              
               - name: {{ cluster_name }}
                 time: {{ time }}
           loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', False) | list }}"
