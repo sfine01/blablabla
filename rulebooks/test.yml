@@ -15,6 +15,17 @@
           name: mynameisshay
           organization: Default
           post_events: true
+          
+#################################################
+          
+    - name: Do things 1
+      condition: event.cats == 'IM a Cat'
+      actions:
+        - run_job_template:
+            name: copy_all_the_files
+            organization: Default
+
+
 
     - name: Set fact
       condition: event.meta is defined
