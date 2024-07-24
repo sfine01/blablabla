@@ -55,13 +55,24 @@
           loop_control:
             label: "{{ item.item }}"
 
+    # - name: test add things to a file
+    #   blockinfile:
+    #     path: "{{ item.stat.path }}" 
+    #     marker: ""
+    #     block: |
+    #         - name: {{ cluster_name }}
+    #           time: {{ time }}
+    #   loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
+    #   loop_control:
+    #     label: "{{ item.stat.path }}"
+    
     - name: test add things to a file
       blockinfile:
         path: "{{ item.stat.path }}" 
         marker: ""
         block: |
-            - name: {{ cluster_name }}
-              time: {{ time }}
+          {{ "- name: " + cluster_name | indent(2, True) }}
+          {{ "time: " + time | indent(2, True) }}
       loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
       loop_control:
         label: "{{ item.stat.path }}"
