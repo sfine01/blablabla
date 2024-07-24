@@ -54,7 +54,7 @@
 ###############################################################
 
     # - name: Update record files
-    #   condition: event.alert.labels.alertname == "ClusterUp" ##### If the activities list is empty dont do anything
+    #   condition: event.fact is defined
     #   action:
     #     run_job_template:
     #       name: mynameisshay
