@@ -1,3 +1,4 @@
 example_activity1:
-- name: example_cluster
-  time: 2024-07-22T12:00:00Z
+
+  - name: example_cluster
+    time: 2024-07-22T12:00:00Z
