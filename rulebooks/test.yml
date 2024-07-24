@@ -7,6 +7,14 @@
         host: 0.0.0.0
         port: 5000
   rules:
+  
+    - name: Get clusters activity list
+      condition: event.alert.labels.alertname == "ClusterUp"
+      action:
+        run_job_template:
+          name: mynameisshay
+          organization: Default
+          post_events: true
 
     - name: Set fact
       condition: event.meta is defined
