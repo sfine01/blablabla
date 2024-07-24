@@ -21,4 +21,4 @@
         data:
           "{{ dynamic_var_name }}": "{{ vars[dynamic_var_name] | default([]) }}" 
           dogs: "IM a dog hello hello"
-          
+          cats: "IM a Cat"
