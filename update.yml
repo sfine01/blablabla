@@ -2,7 +2,7 @@
 - name: Check and update activity files
   hosts: localhost
   vars:
-    cluster_name: "example_cluster2"  # Default value, should be overridden
+    cluster_name: "example_cluster1"  # Default value, should be overridden
     activity_names: ["example_activity1", "example_activity2","example_activity3"]  # Default values, should be overridden
     time: "2024-07-23"  # Default value, should be overridden
     
