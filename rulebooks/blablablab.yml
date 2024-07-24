@@ -49,7 +49,7 @@
       condition: event.meta is defined
       action:
         debug:
-          msg: "{{ fact.activities }}"
+          msg: "{{ facts.activities }}"
 
 ###############################################################
 
