@@ -66,16 +66,20 @@
     #   loop_control:
     #     label: "{{ item.stat.path }}"
     
-    - name: test add things to a file
-      blockinfile:
-        path: "{{ item.stat.path }}" 
-        marker: ""
-        block: |
-            - name: {{ cluster_name }}
-              time: {{ time }}
+    - name: Render the Jinja2 template to a temporary file
+      template:
+        src: templates/add_cluster.j2
+        dest: "/tmp/{{ item.item }}.yml"
       loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
       loop_control:
-        label: "{{ item.stat.path }}"
+        label: "{{ item.item }}"
+        
+    - name: Append the rendered content to the output file
+      shell: cat /tmp/{{ item.item }}.yml >> {{ activities_path }}/{{ item.item }}.yml
+      loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
+      loop_control:
+        label: "{{ item.item }}"
+
         
     - name: printthings
       shell: cat "{{ activities_path }}/{{ item }}.yml"
