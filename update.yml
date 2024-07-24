@@ -49,8 +49,8 @@
             content: |
               {{ item.item }}:
               
-              - name: {{ cluster_name }}
-                time: {{ time }}
+                - name: {{ cluster_name }}
+                  time: {{ time }}
           loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', False) | list }}"
           loop_control:
             label: "{{ item.item }}"
