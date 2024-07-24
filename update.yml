@@ -3,7 +3,7 @@
   hosts: localhost
   vars:
     cluster_name: "example_cluster1"  # Default value, should be overridden
-    activity_names: ["example_activity1", "example_activity2","example_activity3"]  # Default values, should be overridden
+    activity_names: ["example_activity78", "example_activity99","example_activity3"]  # Default values, should be overridden
     time: "2024-07-23"  # Default value, should be overridden
     
     activities_path: "records/activities/"
@@ -54,18 +54,15 @@
           loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', False) | list }}"
           loop_control:
             label: "{{ item.item }}"
+    ###########################
 
-    # - name: test add things to a file
-    #   blockinfile:
-    #     path: "{{ item.stat.path }}" 
-    #     marker: ""
-    #     block: |
-    #         - name: {{ cluster_name }}
-    #           time: {{ time }}
-    #   loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
-    #   loop_control:
-    #     label: "{{ item.stat.path }}"
-    
+        
+    - name: printthings
+      debug:
+        msg: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
+      
+
+    ###########################
     - name: Render the Jinja2 template to a temporary file
       template:
         src: templates/add_activity.j2
