@@ -35,16 +35,18 @@
       actions:
         - debug:
             msg: "HELLOOO"
-        - set_fact:
-            fact:
+        - post_event:
+            event:
               activities: "bla bla bla"
 
     - name: Do things 3
       condition: event.dogs == "IM a dog hello hello"
       actions:
         - debug:
-            msg: "doing something 33"
-
+            msg: "HELLOOO"
+        - post_event:
+            event:
+              haloooooooooooooooooooooooooooooooooooooooooooooooooooooooo: "bla bla bla"
     # - name: print things list
     #   condition: event.meta is defined
     #   action:
