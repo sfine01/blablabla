@@ -16,7 +16,7 @@
           organization: Default
           post_events: true
           
-#################################################
+##################################################################
           
     - name: Do things 1
       condition: event.cats == 'IM a Cat'
@@ -26,7 +26,7 @@
             organization: Default
         - post_event:
             event:
-              blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: [ "hallo" ]
+              blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: "hallo" 
 
     - name: Do things 2
       condition: event.dogs == 'IM a dog hello hello'
@@ -36,7 +36,18 @@
             organization: Default
         - post_event:
             event:
-               blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: "{{ events.blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa }} + ['plz plz plz plzzz']"
-        - debug:
-            msg:
-              "{{ event }}"
+               dudeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee: "plz plz work"
+
+#########################################################################
+    - name: Do things 3
+      condition:
+        any:
+          - event.blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa is defined
+          - event.dudeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee is defined
+      actions:
+        - run_job_template:
+            name: hiiiiiiiiiiiiiiiiiiiiiiiiiiii
+            organization: Default
+
+
+
