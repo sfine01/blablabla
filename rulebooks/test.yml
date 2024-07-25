@@ -42,8 +42,7 @@
     - name: Do things 3
       condition:
         any:
-          - event.blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa is defined
-          - event.dudeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee is defined
+          - event.activity_name is defined
       actions:
         - run_job_template:
             name: hiiiiiiiiiiiiiiiiiiiiiiiiiiii
