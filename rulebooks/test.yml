@@ -27,7 +27,6 @@
         - run_job_template:
             name: copy_all_the_files
             organization: Default
-            job_args:
         - post_event:
             event:
               activity_name: "hallo" 
