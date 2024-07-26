@@ -21,7 +21,7 @@
     - name: Do things 1
       condition:
         all:
-          - event.cluster_x_activities is selectattr('name', '==', event.activity_name)
+          - event.cluster_x_activities is selectattr('name', '==', event.payload.message)
       actions:
         - run_job_template:
             name: copy_all_the_files 
