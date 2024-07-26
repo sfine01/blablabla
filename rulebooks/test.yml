@@ -28,7 +28,7 @@
             name: copy_all_the_files
             organization: Default
             job_args:
-              limit: "{{ event.payload.message }}"
+              limit: "{{ events.payload.message }}"
         - post_event:
             event:
               activity_name: "hallo" 
