@@ -32,33 +32,33 @@
         - post_event:
             event:
               activity_name: "run_to_the_tree" 
+              
 
-
-          
-    # - name: Do things 1                   ### This is working with a simple list without the time in it, seems like the time brakes it
+    # - name: Run XYXYXYXY              
     #   condition:                          
     #     all:
-    #       - event.cluster_x_activities contains events.m_1.payload.message
+    #       - event.cluster_x_activities is selectattr('name', '==', 'XYXYXYXY')
+    #       - event.payload.message is defined
     #   actions:
     #     - run_job_template:
-    #         name: copy_all_the_files 
+    #         name: XYXYXYXY 
     #         organization: Default
     #         job_args:
-    #           limit: "{{ events.m_1.payload.message }}"
+    #           limit: "{{ events.m_1.payload.message }}" ##in the message should be the cluster name
     #     - post_event:
     #         event:
-    #           activity_name: "hallo" 
+    #           activity_name: "XYXYXYXY" 
 
               
 # #########################################################################
-#     - name: This will pach the name activitys to git but just one each time                  ############# This will run each time evet.activity_name will be defined
-#       condition:
-#         any:
-#           - event.activity_name is defined
-#       actions:
-#         - run_job_template:
-#             name: hiiiiiiiiiiiiiiiiiiiiiiiiiiii
-#             organization: Default
+    - name: This will pach the name activitys to git but just one each time                  ############# This will run each time evet.activity_name will be defined
+      condition:
+        any:
+          - event.activity_name is defined
+      actions:
+        - run_job_template:
+            name: hiiiiiiiiiiiiiiiiiiiiiiiiiiii
+            organization: Default
 
 
 
