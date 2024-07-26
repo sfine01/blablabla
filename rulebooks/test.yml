@@ -37,7 +37,7 @@
     # - name: Run XYXYXYXY              
     #   condition:                          
     #     all:
-    #       - event.cluster_x_activities is selectattr('name', '==', 'XYXYXYXY')
+    #       - event.cluster_x_activities is not selectattr('name', '==', 'XYXYXYXY')
     #       - event.payload.message is defined
     #   actions:
     #     - run_job_template:
