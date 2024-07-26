@@ -21,11 +21,10 @@
     - name: Do things 1
       condition:
         all:
-          - event.cats == 'IM a Cat'
-          - event.payload.message == "hi"
+          - event.cluster_x_activities is selectattr('name', '==', event.activity_name)
       actions:
         - run_job_template:
-            name: copy_all_the_files
+            name: copy_all_the_files 
             organization: Default
             job_args:
               limit: "{{ events.m_1.payload.message }}"
@@ -33,16 +32,22 @@
             event:
               activity_name: "hallo" 
 
-#     - name: Do things 2
-#       condition: event.dogs == 'IM a dog hello hello'
-#       actions:
-#         - run_job_template:
-#             name: copy_all_the_files
-#             organization: Default
-#         - post_event:
-#             event:
-#                activity_name: "plz plz work"
+    # - name: Do things 1
+    #   condition:
+    #     all:
+    #       - event.cats == 'IM a Cat'
+    #       - event.payload.message == "hi"
+    #   actions:
+    #     - run_job_template:
+    #         name: copy_all_the_files
+    #         organization: Default
+    #         job_args:
+    #           limit: "{{ events.m_1.payload.message }}"
+    #     - post_event:
+    #         event:
+    #           activity_name: "hallo" 
 
+              
 # #########################################################################
 #     - name: Do things 3
 #       condition:
