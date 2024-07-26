@@ -18,7 +18,7 @@
           
 ##################################################################
 
-    - name: Do things 1               
+    - name: Do things 1               # the condition should check that the cluster file doesnt contains the activity name!!!!
       condition:                          
         all:
           - event.cluster_x_activities is defined
@@ -29,7 +29,7 @@
             job_args:
               limit: "{{ events.m_1.payload.message }}"
         - debug:
-            msg: "{{ event.cluster_x_activities }}"
+            msg: "{{ event.cluster_x_activities | is selectattr('name', '==', 'run_to_the_tree') }}"
           
     # - name: Do things 1                   ### This is working with a simple list without the time in it, seems like the time brakes it
     #   condition:                          
