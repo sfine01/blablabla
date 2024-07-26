@@ -29,6 +29,11 @@
             organization: Default
             job_args:
               limit: "{{ events.m_1.payload.message }}" ##in the message should be the cluster name
+        - post_event:
+            event:
+              activity_name: "run_to_the_tree" 
+
+
           
     # - name: Do things 1                   ### This is working with a simple list without the time in it, seems like the time brakes it
     #   condition:                          
