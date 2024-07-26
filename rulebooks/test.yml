@@ -19,34 +19,38 @@
 ##################################################################
           
     - name: Do things 1
-      condition: event.cats == 'IM a Cat'
+      condition:
+        all:
+          - event.cats == 'IM a Cat'
+          - event.event.payload.message == "hi"
       actions:
         - run_job_template:
             name: copy_all_the_files
             organization: Default
+            job_args:
         - post_event:
             event:
               activity_name: "hallo" 
 
-    - name: Do things 2
-      condition: event.dogs == 'IM a dog hello hello'
-      actions:
-        - run_job_template:
-            name: copy_all_the_files
-            organization: Default
-        - post_event:
-            event:
-               activity_name: "plz plz work"
+#     - name: Do things 2
+#       condition: event.dogs == 'IM a dog hello hello'
+#       actions:
+#         - run_job_template:
+#             name: copy_all_the_files
+#             organization: Default
+#         - post_event:
+#             event:
+#                activity_name: "plz plz work"
 
-#########################################################################
-    - name: Do things 3
-      condition:
-        any:
-          - event.activity_name is defined
-      actions:
-        - run_job_template:
-            name: hiiiiiiiiiiiiiiiiiiiiiiiiiiii
-            organization: Default
+# #########################################################################
+#     - name: Do things 3
+#       condition:
+#         any:
+#           - event.activity_name is defined
+#       actions:
+#         - run_job_template:
+#             name: hiiiiiiiiiiiiiiiiiiiiiiiiiiii
+#             organization: Default
 
 
 
