@@ -18,28 +18,13 @@
           
 ##################################################################
           
-    - name: Do things 1
-      condition:
-        all:
-          - event.cluster_x_activities contains events.m_1.payload.message
-      actions:
-        - run_job_template:
-            name: copy_all_the_files 
-            organization: Default
-            job_args:
-              limit: "{{ events.m_1.payload.message }}"
-        - post_event:
-            event:
-              activity_name: "hallo" 
-
-    # - name: Do things 1
-    #   condition:
+    # - name: Do things 1                   ### This is working with a simple list without the time in it, seems like the time brakes it
+    #   condition:                          
     #     all:
-    #       - event.cats == 'IM a Cat'
-    #       - event.payload.message == "hi"
+    #       - event.cluster_x_activities contains events.m_1.payload.message
     #   actions:
     #     - run_job_template:
-    #         name: copy_all_the_files
+    #         name: copy_all_the_files 
     #         organization: Default
     #         job_args:
     #           limit: "{{ events.m_1.payload.message }}"
