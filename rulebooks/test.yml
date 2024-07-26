@@ -17,6 +17,19 @@
           post_events: true
           
 ##################################################################
+
+    - name: Do things 1               
+      condition:                          
+        all:
+          - event.cluster_x_activities is defined
+      actions:
+        - run_job_template:
+            name: copy_all_the_files 
+            organization: Default
+            job_args:
+              limit: "{{ events.m_1.payload.message }}"
+        - debug:
+            msg: "{{ event.cluster_x_activities }}"
           
     # - name: Do things 1                   ### This is working with a simple list without the time in it, seems like the time brakes it
     #   condition:                          
