@@ -20,6 +20,5 @@
       ansible.builtin.set_stats:
         data:
          "{{ dynamic_var_name }}": "{{ vars[dynamic_var_name] | default([]) }}" 
-          cluster_x_activitie:
-            dogs: "IM a dog hello hello"
-            cluster_name: "hi"
+          dogs: "IM a dog hello hello"
+          cluster_name: "hi"
