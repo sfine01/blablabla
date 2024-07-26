@@ -51,7 +51,7 @@
 
               
 # #########################################################################
-#     - name: Do things 3
+#     - name: This will pach the name activitys to git but just one each time                  ############# This will run each time evet.activity_name will be defined
 #       condition:
 #         any:
 #           - event.activity_name is defined
