@@ -19,6 +19,7 @@
     - name: Set artifacts
       ansible.builtin.set_stats:
         data:
-          "{{ dynamic_var_name }}": "{{ vars[dynamic_var_name] | default([]) }}",
-          dogs: "IM a dog hello hello",
+          "{{ dynamic_var_name }}": "{{ vars[dynamic_var_name] | default([]) }}" 
+          dogs: "IM a dog hello hello"
+          cats: "IM a Cat"
           cluster_name: "hi"
