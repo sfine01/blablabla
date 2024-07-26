@@ -21,7 +21,7 @@
     - name: Do things 1               # the condition should check that the cluster file doesnt contains the activity name!!!!
       condition:                          
         all:
-          - "{{ event.cluster_x_activities | is selectattr('name', '==', 'run_to_the_tree') }}"
+          - event.cluster_x_activities is selectattr('name', '==', 'run_to_the_tree')
       actions:
         - run_job_template:
             name: copy_all_the_files 
