@@ -16,7 +16,7 @@
           organization: Default
           post_events: true
           job_args:
-            limit: "{{ events.m_1.payload.message }}"
+            limit: "{{ event.payload.message }}"
 
           
 ##################################################################
