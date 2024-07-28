@@ -15,7 +15,7 @@
         cluster_file_path: "record/clusters/{{ cluster_name }}.yml"
 
 
-    - name: Check if cluster file exists
+    - name: Check if files exists
       stat:
         path: "{{ cluster_file_path }}"
       register: cluster_file_status
@@ -23,11 +23,18 @@
         - "{{ activity_file_path }}"
         - "{{ cluster_file_path }}"
         
+    # - name: Create new files
+    #   copy:
+    #     dest: "{{ cluster_file_path }}"
+    #     content: |
+    #       {{ cluster_name }}:
+    #   when: itme.stat.exists == false
+    #   loop: cluster_file_status
 
     - name: print varible
       debug:
-        var: cluster_file_status
-
+        var: item
+      loop: cluster_file_status
 
 #     # - name: Check if cluster file exists
 #     #   stat:
