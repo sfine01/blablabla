@@ -49,7 +49,21 @@
         - post_event:
             event:
               activity_name: "do_things_2"
-
+              
+    - name: do_things_3
+      condition:                          
+        all:
+          - event.completed_activities is not selectattr('name', '==', 'do_things_3')
+          - event.payload.message is defined
+      actions:
+        - run_job_template:
+            name: do_things_2 
+            organization: Default
+            job_args:
+              limit: "{{ events.m_1.payload.message }}" 
+        - post_event:
+            event:
+              activity_name: "do_things_3"
               
     # - name: Run XYXYXYXY              
     #   condition:                          
@@ -70,14 +84,15 @@
 # #########################################################################
     - name: Add activity name to the list               ############# This will run each time evet.activity_name will be defined
       condition:
-        any:
+        all:
           - event.activity_name is defined
+          - event.payload.message is defined
       actions:
         - run_job_template:
             name: patch_activity
             organization: Default
             job_args:
-              shay: "{{ events.m_1.payload.message }}" 
+              cluster_name: "{{ events.m_1.payload.message }}" 
 
 
 
