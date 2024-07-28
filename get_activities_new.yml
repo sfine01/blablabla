@@ -2,8 +2,6 @@
 - name: Set clusters activity list
   hosts: localhost
   gather_facts: false
-  vars:
-    dynamic_var_name: "{{ cluster_name }}_activities"
 
   tasks:
  
