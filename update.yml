@@ -11,7 +11,7 @@
         time: "WTF"
         
     - set_fact:
-        activities_path: "record/activities/"
+        activity_file_path: "record/activities/{{ activity_name }}.yml"
         cluster_file_path: "record/clusters/{{ cluster_name }}.yml"
 
 
