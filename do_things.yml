@@ -1,0 +1,10 @@
+---
+- name: do_things
+  hosts: localhost
+  gather_facts: false
+  tasks:
+  
+    - name: do_things
+      debug:
+        msg: "HELLO IM DOING THINGSSS YEAH!!!!!"
+        
