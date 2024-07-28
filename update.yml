@@ -30,7 +30,7 @@
 
     - name: Render the Jinja2 template to a temporary file
       template:
-        src: templates/add_cluster.j2
+        src: templates/add_to_cluster_file.j2
         dest: /tmp/activities_output.txt
         
     - name: Append the rendered content to the output file
