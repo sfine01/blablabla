@@ -12,7 +12,7 @@
       condition: event.payload.message is defined
       action:
         run_job_template:
-          name: mynameisshay
+          name: get_activities
           organization: Default
           post_events: true
           job_args:
@@ -21,20 +21,20 @@
           
 ##################################################################
 
-    - name: Do things 1               # the condition should check that the cluster file doesnt contains the activity name!!!!
+    - name: do_things_1               # the condition should check that the cluster file doesnt contains the activity name!!!!
       condition:                          
         all:
-          - event.cluster_x_activities is selectattr('name', '==', 'run_to_the_tree')
+          - event.cluster_x_activities is not selectattr('name', '==', 'do_things_1')
           - event.payload.message is defined
       actions:
         - run_job_template:
-            name: copy_all_the_files 
+            name: do_things_1 
             organization: Default
             job_args:
-              limit: "{{ events.m_1.payload.message }}" ##in the message should be the cluster name
+              limit: "{{ events.m_1.payload.message }}" 
         - post_event:
             event:
-              activity_name: "run_to_the_tree" 
+              activity_name: "do_things_1" 
               
 
     # - name: Run XYXYXYXY              
