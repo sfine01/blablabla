@@ -14,112 +14,83 @@
         activity_file_path: "record/activities/{{ activity_name }}.yml"
         cluster_file_path: "record/clusters/{{ cluster_name }}.yml"
 
-
-    - name: Check if files exists
+    - name: Check if cluster file exists
       stat:
         path: "{{ cluster_file_path }}"
-      register: file_status
-      loop:
-        - "{{ activity_file_path }}"
-        - "{{ cluster_file_path }}"
+      register: cluster_file_status
+
+    - name: Create new cluster file
+      copy:
+        dest: "{{ cluster_file_path }}"
+        content: |
+          {{ cluster_name }}:
+      when: cluster_file_status.stat.exists == false
+
+    - name: Render the Jinja2 template to a temporary file
+      template:
+        src: templates/add_to_cluster_file.j2
+        dest: /tmp/cluster_file_template.txt
         
-    # - name: Create new files
-    #   copy:
-    #     dest: "{{ cluster_file_path }}"
-    #     content: |
-    #       {{ cluster_name }}:
-    #   when: itme.stat.exists == false
-    #   loop: file_status
-
-    - name: print varible
-      debug:
-        var: item
-      loop: "{{ file_status.results }}"
-
-#     # - name: Check if cluster file exists
-#     #   stat:
-#     #     path: "{{ cluster_file_path }}"
-#     #   register: cluster_file_status
-
-#     # - name: Create new cluster file
-#     #   copy:
-#     #     dest: "{{ cluster_file_path }}"
-#     #     content: |
-#     #       {{ cluster_name }}:
-#     #   when: cluster_file_status.stat.exists == false
-
-#     # - name: Render the Jinja2 template to a temporary file
-#     #   template:
-#     #     src: templates/add_to_cluster_file.j2
-#     #     dest: /tmp/cluster_file_template.txt
-        
-#     # - name: Append the rendered content to the output file
-#     #   shell: cat /tmp/cluster_file_template.txt >> {{ cluster_file_path }}
+    - name: Append the rendered content to the output file
+      shell: cat /tmp/cluster_file_template.txt >> {{ cluster_file_path }}
       
-# ################################################################################### 
-#     - name: Check if activity file exists
-#       stat:
-#         path: "{{ activity_file_path }}"
-#       register: activity_file_status
+################################################################################### 
+    - name: Check if activity file exists
+      stat:
+        path: "{{ activity_file_path }}"
+      register: activity_file_status
 
-#     - name: Create new cluster file
-#       copy:
-#         dest: "{{ activity_file_path }}"
-#         content: |
-#           {{ activity_name }}:
-#       when: activity_file_status.stat.exists == false
+    - name: Create new cluster file
+      copy:
+        dest: "{{ activity_file_path }}"
+        content: |
+          {{ activity_name }}:
+      when: activity_file_status.stat.exists == false
 
-#     - name: Render the Jinja2 template to a temporary file
-#       template:
-#         src: templates/add_to_activity_file.j2
-#         dest: /tmp/activity_file_template.txt
+    - name: Render the Jinja2 template to a temporary file
+      template:
+        src: templates/add_to_activity_file.j2
+        dest: /tmp/activity_file_template.txt
         
-#     - name: Append the rendered content to the output file
-#       shell: cat /tmp/activity_file_template.txt >> {{ activity_file_path }}
+    - name: Append the rendered content to the output file
+      shell: cat /tmp/activity_file_template.txt >> {{ activity_file_path }}
 
-
-
-#     - name: print the what is going on
-#       shell: ls record/activities/
-      
-#     - name: print the what is going on
-#       shell: cat {{ activity_file_path }}
 
       
-#     # - name: Check if activity file exists
-#     #   stat:
-#     #     path: "{{ activities_path }}{{ item }}.yml"
-#     #   register: activity_file_status
-#     #   loop: "{{ activity_names }}"
+    # - name: Check if activity file exists
+    #   stat:
+    #     path: "{{ activities_path }}{{ item }}.yml"
+    #   register: activity_file_status
+    #   loop: "{{ activity_names }}"
 
-#     # - name: Process non-existing activity files
-#     #   when: activity_file_status.results | selectattr('stat.exists', 'equalto', False) | list | length > 0
-#     #   block:
-#     #     - name: Create new activity file
-#     #       copy:
-#     #         dest: "{{ activities_path }}{{ item.item }}.yml"
-#     #         content: |
-#     #           {{ item.item }}:
+    # - name: Process non-existing activity files
+    #   when: activity_file_status.results | selectattr('stat.exists', 'equalto', False) | list | length > 0
+    #   block:
+    #     - name: Create new activity file
+    #       copy:
+    #         dest: "{{ activities_path }}{{ item.item }}.yml"
+    #         content: |
+    #           {{ item.item }}:
               
-#     #             - name: {{ cluster_name }}
-#     #               time: {{ time }}
-#     #       loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', False) | list }}"
-#     #       loop_control:
-#     #         label: "{{ item.item }}"
+    #             - name: {{ cluster_name }}
+    #               time: {{ time }}
+    #       loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', False) | list }}"
+    #       loop_control:
+    #         label: "{{ item.item }}"
 
-#     # - name: Render the Jinja2 template to a temporary file
-#     #   template:
-#     #     src: templates/add_activity.j2
-#     #     dest: "/tmp/{{ item.item }}.yml"
-#     #   loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
-#     #   loop_control:
-#     #     label: "{{ item.item }}"
+    # - name: Render the Jinja2 template to a temporary file
+    #   template:
+    #     src: templates/add_activity.j2
+    #     dest: "/tmp/{{ item.item }}.yml"
+    #   loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
+    #   loop_control:
+    #     label: "{{ item.item }}"
         
-#     # - name: Append the rendered content to the output file
-#     #   shell: cat /tmp/{{ item.item }}.yml >> {{ activities_path }}/{{ item.item }}.yml
-#     #   loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
-#     #   loop_control:
-#     #     label: "{{ item.item }}"
+    # - name: Append the rendered content to the output file
+    #   shell: cat /tmp/{{ item.item }}.yml >> {{ activities_path }}/{{ item.item }}.yml
+    #   loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
+    #   loop_control:
+    #     label: "{{ item.item }}"
 
 
 
