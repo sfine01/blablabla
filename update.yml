@@ -60,7 +60,7 @@
 
 
     - name: print the what is going on
-      shell: ls {{ activity_file_path }}
+      shell: ls record/activities/
       
     - name: print the what is going on
       shell: cat {{ activity_file_path }}
