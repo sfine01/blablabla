@@ -51,6 +51,21 @@
               activity_name: do_things_2
 
 
+    - name: do_things_3               # the condition should check that the cluster file doesnt contains the activity name!!!!
+      condition: event.completed_activities is not selectattr('name', '==', 'do_things_3')
+      actions:
+        - run_job_template:
+            name: do_things_3 
+            organization: Default
+            job_args:
+              limit: "{{ event.cluster_name }}" 
+        - run_job_template:
+            name: patch_activity
+            organization: Default
+            job_args:
+              limit: "{{ event.cluster_name }}"
+              activity_name: do_things_3
+
               
 #     # - name: Run XYXYXYXY              
 #     #   condition:                          
