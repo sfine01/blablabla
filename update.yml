@@ -1,59 +1,59 @@
-# ---
-# - name: Check and update activity files
-#   hosts: localhost
-#   gather_facts: false
-#   tasks:
+---
+- name: Check and update activity files
+  hosts: localhost
+  gather_facts: false
+  tasks:
 
   
-#     - set_fact:
-#         cluster_name: "{{ ansible_eda.event.cluster_name }}"
-#         activity_name: "{{ ansible_eda.rule }}"
-#         time: "WTF"
+    - set_fact:
+        cluster_name: "{{ ansible_eda.event.cluster_name }}"
+        activity_name: "{{ ansible_eda.rule }}"
+        time: "WTF"
         
-#     - set_fact:
-#         activity_file_path: "record/activities/{{ activity_name }}.yml"
-#         cluster_file_path: "record/clusters/{{ cluster_name }}.yml"
+    - set_fact:
+        activity_file_path: "record/activities/{{ activity_name }}.yml"
+        cluster_file_path: "record/clusters/{{ cluster_name }}.yml"
 
-#     - name: Check if cluster file exists
-#       stat:
-#         path: "{{ cluster_file_path }}"
-#       register: cluster_file_status
+    - name: Check if cluster file exists
+      stat:
+        path: "{{ cluster_file_path }}"
+      register: cluster_file_status
 
-#     - name: Create new cluster file
-#       copy:
-#         dest: "{{ cluster_file_path }}"
-#         content: |
-#           {{ cluster_name }}:
-#       when: cluster_file_status.stat.exists == false
+    - name: Create new cluster file
+      copy:
+        dest: "{{ cluster_file_path }}"
+        content: |
+          {{ cluster_name }}:
+      when: cluster_file_status.stat.exists == false
 
-#     - name: Render the Jinja2 template to a temporary file
-#       template:
-#         src: templates/add_to_cluster_file.j2
-#         dest: /tmp/cluster_file_template.txt
+    - name: Render the Jinja2 template to a temporary file
+      template:
+        src: templates/add_to_cluster_file.j2
+        dest: /tmp/cluster_file_template.txt
         
-#     - name: Append the rendered content to the output file
-#       shell: cat /tmp/cluster_file_template.txt >> {{ cluster_file_path }}
+    - name: Append the rendered content to the output file
+      shell: cat /tmp/cluster_file_template.txt >> {{ cluster_file_path }}
       
-# ################################################################################### 
-#     - name: Check if activity file exists
-#       stat:
-#         path: "{{ activity_file_path }}"
-#       register: activity_file_status
+################################################################################### 
+    - name: Check if activity file exists
+      stat:
+        path: "{{ activity_file_path }}"
+      register: activity_file_status
 
-#     - name: Create new cluster file
-#       copy:
-#         dest: "{{ activity_file_path }}"
-#         content: |
-#           {{ activity_name }}:
-#       when: activity_file_status.stat.exists == false
+    - name: Create new cluster file
+      copy:
+        dest: "{{ activity_file_path }}"
+        content: |
+          {{ activity_name }}:
+      when: activity_file_status.stat.exists == false
 
-#     - name: Render the Jinja2 template to a temporary file
-#       template:
-#         src: templates/add_to_activity_file.j2
-#         dest: /tmp/activity_file_template.txt
+    - name: Render the Jinja2 template to a temporary file
+      template:
+        src: templates/add_to_activity_file.j2
+        dest: /tmp/activity_file_template.txt
         
-#     - name: Append the rendered content to the output file
-#       shell: cat /tmp/activity_file_template.txt >> {{ activity_file_path }}
+    - name: Append the rendered content to the output file
+      shell: cat /tmp/activity_file_template.txt >> {{ activity_file_path }}
 
 
       
@@ -91,52 +91,3 @@
 #     #   loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
 #     #   loop_control:
 #     #     label: "{{ item.item }}"
-- name: Check and update activity files
-  hosts: localhost
-  gather_facts: false
-  tasks:
-    - set_fact:
-        cluster_name: "{{ ansible_eda.event.cluster_name }}"
-        activity_name: "{{ ansible_eda.rule }}"
-        time: "WTF"
-        files_to_process:
-          - name: "{{ cluster_name }}"
-            path: "record/clusters/{{ cluster_name }}.yml"
-            template: templates/add_to_cluster_file.j2
-            file_status_var: cluster_file_status
-          - name: "{{ activity_name }}"
-            path: "record/activities/{{ activity_name }}.yml"
-            template: templates/add_to_activity_file.j2
-            file_status_var: activity_file_status
-
-    - name: Check if files exist
-      stat:
-        path: "{{ item.path }}"
-      register: "{{ item.file_status_var }}"
-      loop: "{{ files_to_process }}"
-      loop_control:
-        loop_var: item
-
-    - name: Create new files if they do not exist
-      copy:
-        dest: "{{ item.path }}"
-        content: |
-          {{ item.name }}:
-      when: not (item.file_status_var.stat.exists | default(false))
-      loop: "{{ files_to_process }}"
-      loop_control:
-        loop_var: item
-
-    - name: Render the Jinja2 templates to temporary files
-      template:
-        src: "{{ item.template }}"
-        dest: "/tmp/{{ item.name | replace(' ', '_') }}_template.txt"
-      loop: "{{ files_to_process }}"
-      loop_control:
-        loop_var: item
-
-    - name: Append the rendered content to the output files
-      shell: cat "/tmp/{{ item.name | replace(' ', '_') }}_template.txt" >> "{{ item.path }}"
-      loop: "{{ files_to_process }}"
-      loop_control:
-        loop_var: item
