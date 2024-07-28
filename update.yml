@@ -91,7 +91,6 @@
 #     #   loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
 #     #   loop_control:
 #     #     label: "{{ item.item }}"
----
 - name: Check and update activity files
   hosts: localhost
   gather_facts: false
@@ -100,44 +99,44 @@
         cluster_name: "{{ ansible_eda.event.cluster_name }}"
         activity_name: "{{ ansible_eda.rule }}"
         time: "WTF"
-
-    - set_fact:
         files_to_process:
           - name: "{{ cluster_name }}"
             path: "record/clusters/{{ cluster_name }}.yml"
             template: templates/add_to_cluster_file.j2
+            file_status_var: cluster_file_status
           - name: "{{ activity_name }}"
             path: "record/activities/{{ activity_name }}.yml"
             template: templates/add_to_activity_file.j2
+            file_status_var: activity_file_status
 
-    - name: Check if files exist and create if necessary
-      block:
-        - name: Check if the file exists
-          stat:
-            path: "{{ item.path }}"
-          register: file_status
-
-        - name: Create new file if not present
-          copy:
-            dest: "{{ item.path }}"
-            content: |
-              {{ item.name }}:
-          when: file_status.stat.exists == false
+    - name: Check if files exist
+      stat:
+        path: "{{ item.path }}"
+      register: "{{ item.file_status_var }}"
       loop: "{{ files_to_process }}"
       loop_control:
         loop_var: item
 
-    - name: Render and append templates to the files
-      block:
-        - name: Render the Jinja2 template to a temporary file
-          template:
-            src: "{{ item.template }}"
-            dest: "/tmp/{{ item.name | replace(' ', '_') }}_template.txt"
-        
-        - name: Append the rendered content to the output file
-          shell: cat "/tmp/{{ item.name | replace(' ', '_') }}_template.txt" >> "{{ item.path }}"
+    - name: Create new files if they do not exist
+      copy:
+        dest: "{{ item.path }}"
+        content: |
+          {{ item.name }}:
+      when: not (item.file_status_var.stat.exists | default(false))
       loop: "{{ files_to_process }}"
       loop_control:
         loop_var: item
 
+    - name: Render the Jinja2 templates to temporary files
+      template:
+        src: "{{ item.template }}"
+        dest: "/tmp/{{ item.name | replace(' ', '_') }}_template.txt"
+      loop: "{{ files_to_process }}"
+      loop_control:
+        loop_var: item
 
+    - name: Append the rendered content to the output files
+      shell: cat "/tmp/{{ item.name | replace(' ', '_') }}_template.txt" >> "{{ item.path }}"
+      loop: "{{ files_to_process }}"
+      loop_control:
+        loop_var: item
