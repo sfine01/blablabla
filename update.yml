@@ -39,10 +39,10 @@
 
 
     - name: print the what is going on
-      shell: ls cluster_file_path
+      shell: ls {{ cluster_file_path }}
       
     - name: print the what is going on
-      shell: cat cluster_file_path
+      shell: cat {{ cluster_file_path }}
       
 
 ################################################################################### 
