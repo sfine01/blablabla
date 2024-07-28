@@ -34,7 +34,7 @@
     - name: print varible
       debug:
         var: item
-      loop: cluster_file_status
+      loop: "{{ cluster_file_status }}"
 
 #     # - name: Check if cluster file exists
 #     #   stat:
