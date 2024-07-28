@@ -35,45 +35,52 @@
         
     - name: Append the rendered content to the output file
       shell: cat /tmp/activities_output.txt >> {{ cluster_file_path }}
+
+
+
+    - name: print the what is going on
+      shell: ls record/{{ cluster_name }}.yml
+      
+    - name: print the what is going on
+      shell: cat record/{{ cluster_name }}.yml
       
 
 ################################################################################### 
 
-    - name: Check if activity file exists
-      stat:
-        path: "{{ activities_path }}{{ item }}.yml"
-      register: activity_file_status
-      loop: "{{ activity_names }}"
+    # - name: Check if activity file exists
+    #   stat:
+    #     path: "{{ activities_path }}{{ item }}.yml"
+    #   register: activity_file_status
+    #   loop: "{{ activity_names }}"
 
-    - name: Process non-existing activity files
-      when: activity_file_status.results | selectattr('stat.exists', 'equalto', False) | list | length > 0
-      block:
-        - name: Create new activity file
-          copy:
-            dest: "{{ activities_path }}{{ item.item }}.yml"
-            content: |
-              {{ item.item }}:
+    # - name: Process non-existing activity files
+    #   when: activity_file_status.results | selectattr('stat.exists', 'equalto', False) | list | length > 0
+    #   block:
+    #     - name: Create new activity file
+    #       copy:
+    #         dest: "{{ activities_path }}{{ item.item }}.yml"
+    #         content: |
+    #           {{ item.item }}:
               
-                - name: {{ cluster_name }}
-                  time: {{ time }}
-          loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', False) | list }}"
-          loop_control:
-            label: "{{ item.item }}"
+    #             - name: {{ cluster_name }}
+    #               time: {{ time }}
+    #       loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', False) | list }}"
+    #       loop_control:
+    #         label: "{{ item.item }}"
 
-    - name: Render the Jinja2 template to a temporary file
-      template:
-        src: templates/add_activity.j2
-        dest: "/tmp/{{ item.item }}.yml"
-      loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
-      loop_control:
-        label: "{{ item.item }}"
+    # - name: Render the Jinja2 template to a temporary file
+    #   template:
+    #     src: templates/add_activity.j2
+    #     dest: "/tmp/{{ item.item }}.yml"
+    #   loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
+    #   loop_control:
+    #     label: "{{ item.item }}"
         
-    - name: Append the rendered content to the output file
-      shell: cat /tmp/{{ item.item }}.yml >> {{ activities_path }}/{{ item.item }}.yml
-      loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
-      loop_control:
-        label: "{{ item.item }}"
+    # - name: Append the rendered content to the output file
+    #   shell: cat /tmp/{{ item.item }}.yml >> {{ activities_path }}/{{ item.item }}.yml
+    #   loop: "{{ activity_file_status.results | selectattr('stat.exists', 'equalto', True) | list }}"
+    #   loop_control:
+    #     label: "{{ item.item }}"
 
 
-##################################################
-## Push to git ## seems like the git moudle doesnt push only pulls
+
