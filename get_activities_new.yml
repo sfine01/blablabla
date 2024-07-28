@@ -17,4 +17,5 @@
     - name: Set artifacts
       ansible.builtin.set_stats:
         data:
-          "completed_activities": "{{ completed_activities | default([]) }}" 
+          "completed_activities": "{{ completed_activities | default([]) }}"
+          cluster_name: "{{ cluster_name }}"
