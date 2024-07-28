@@ -37,7 +37,7 @@
     #   shell: cat /tmp/cluster_file_template.txt >> {{ cluster_file_path }}
       
 ################################################################################### 
-   - name: Check if activity file exists
+    - name: Check if activity file exists
       stat:
         path: "{{ activity_file_path }}"
       register: activity_file_status
