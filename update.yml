@@ -6,7 +6,7 @@
 
   
     - set_fact:
-        cluster_name: "{{ ansible_eda.event.payload.message }}"
+        cluster_name: "{{ ansible_eda.event.message }}"
         activity_name: "{{ ansible_eda.rule }}"
         time: "WTF"
 
