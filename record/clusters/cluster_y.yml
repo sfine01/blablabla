@@ -1,6 +1,4 @@
-cluster_y_activities:
-    	- name: run_to_the_tree
-      	  time: 11:16_21.1.2024
+completed_activities:
 
-    	- name: copy_all_the_files
-      	  time: 22:59_21.3.2024
+  - name: do_things_1
+    time: 10:16_21.1.2024
