@@ -16,28 +16,10 @@
     - name: Get clusters activity list
       condition: event.alert.labels.alertname == "ClusterUp"
       action:
-        run_job_template:
-          name: mynameisshay
-          organization: Default
-          post_events: true
-          
-###############################################################
-
-    - name: Do things 1
-      condition: event.dog == "IM a dog hello hello"
-      actions:
-        - run_job_template:
-            name: copy_all_the_files
-            organization: Default
-
-
-###############################################################
-
-    - name: Update record files
-      condition: event.somthing is defined
-      action:
-        run_job_template:
-          name: plzzzzzzzzzzzzzzzzzzzzzzzzzz
-          organization: Default
-          job_args:
-            shay: fine
+        debug:
+        
+        
+        # run_job_template:
+        #   name: mynameisshay
+        #   organization: Default
+        #   post_events: true
