@@ -21,7 +21,10 @@
 ##################################################################
 
     - name: do_things_1               # the condition should check that the cluster file doesnt contains the activity name!!!!
-      condition: event.completed_activities is not selectattr('name', '==', 'do_things_1') and events.m_1.payload.message is defined
+      condition: 
+      all:
+        - event.completed_activities is not selectattr('name', '==', 'do_things_1')
+        - event.payload.message is defined
       actions:
         - run_job_template:
             name: do_things_1 
