@@ -4,6 +4,8 @@
   gather_facts: false
 
   tasks:
+    - set_fact:
+        cluster_name: "{{ ansible_eda.event.payload.message }}"
  
     - name: Include cluster-specific vars file
       include_vars:
