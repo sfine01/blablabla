@@ -16,12 +16,12 @@
 
 
   
-    - name: Check if cluster if exists
+    - name: Check if cluster file exists
       stat:
         path: "{{ cluster_file_path }}"
       register: cluster_file_status
 
-    - name: Create new activity file
+    - name: Create new cluster file
       copy:
         dest: "{{ cluster_file_path }}"
         content: |
@@ -31,18 +31,18 @@
     - name: Render the Jinja2 template to a temporary file
       template:
         src: templates/add_to_cluster_file.j2
-        dest: /tmp/activities_output.txt
+        dest: /tmp/cluster_file_template.txt
         
     - name: Append the rendered content to the output file
-      shell: cat /tmp/activities_output.txt >> {{ cluster_file_path }}
+      shell: cat /tmp/cluster_file_template.txt >> {{ cluster_file_path }}
 
 
 
     - name: print the what is going on
-      shell: ls record/{{ cluster_name }}.yml
+      shell: ls cluster_file_path
       
     - name: print the what is going on
-      shell: cat record/{{ cluster_name }}.yml
+      shell: cat cluster_file_path
       
 
 ################################################################################### 
