@@ -16,37 +16,56 @@
 
 
   
-    - name: Check if cluster file exists
+    # - name: Check if cluster file exists
+    #   stat:
+    #     path: "{{ cluster_file_path }}"
+    #   register: cluster_file_status
+
+    # - name: Create new cluster file
+    #   copy:
+    #     dest: "{{ cluster_file_path }}"
+    #     content: |
+    #       {{ cluster_name }}:
+    #   when: cluster_file_status.stat.exists == false
+
+    # - name: Render the Jinja2 template to a temporary file
+    #   template:
+    #     src: templates/add_to_cluster_file.j2
+    #     dest: /tmp/cluster_file_template.txt
+        
+    # - name: Append the rendered content to the output file
+    #   shell: cat /tmp/cluster_file_template.txt >> {{ cluster_file_path }}
+      
+################################################################################### 
+   - name: Check if activity file exists
       stat:
-        path: "{{ cluster_file_path }}"
-      register: cluster_file_status
+        path: "{{ activity_file_path }}"
+      register: activity_file_status
 
     - name: Create new cluster file
       copy:
-        dest: "{{ cluster_file_path }}"
+        dest: "{{ activity_file_path }}"
         content: |
-          {{ cluster_name }}:
-      when: cluster_file_status.stat.exists == false
+          {{ activity_name }}:
+      when: activity_file_status.stat.exists == false
 
     - name: Render the Jinja2 template to a temporary file
       template:
-        src: templates/add_to_cluster_file.j2
-        dest: /tmp/cluster_file_template.txt
+        src: templates/add_to_activity_file.j2
+        dest: /tmp/activity_file_template.txt
         
     - name: Append the rendered content to the output file
-      shell: cat /tmp/cluster_file_template.txt >> {{ cluster_file_path }}
+      shell: cat /tmp/activity_file_template.txt >> {{ activity_file_path }}
 
 
 
     - name: print the what is going on
-      shell: ls {{ cluster_file_path }}
+      shell: ls {{ activity_file_path }}
       
     - name: print the what is going on
-      shell: cat {{ cluster_file_path }}
+      shell: cat {{ activity_file_path }}
+
       
-
-################################################################################### 
-
     # - name: Check if activity file exists
     #   stat:
     #     path: "{{ activities_path }}{{ item }}.yml"
