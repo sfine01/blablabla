@@ -9,7 +9,7 @@
   rules:
   
     - name: Get clusters activity list
-      condition: event.payload.message == "hi"
+      condition: event.payload.message == "cluster_y"
       action:
         run_job_template:
           name: mynameisshay
