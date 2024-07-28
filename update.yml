@@ -1,15 +1,20 @@
 ---
 - name: Check and update activity files
   hosts: localhost
-  vars:
-    cluster_name: "example_cluster1"  # Default value, should be overridden
-    activity_names: ["example_activity78", "example_activity99","example_activity3"]  # Default values, should be overridden
-    time: "2024-07-23"  # Default value, should be overridden
-    
-    activities_path: "records/activities/"
-    cluster_file_path: "records/clusters/{{ cluster_name }}.yml"
-  
+  gather_facts: false
   tasks:
+
+  
+    - set_fact:
+        cluster_name: "{{ ansible_eda.event.payload.message }}"
+        activity_name: "{{ ansible_eda.rule }}"
+        time: "WTF"
+
+     - set_fact:
+        activities_path: "records/activities/"
+        cluster_file_path: "records/clusters/{{ cluster_name }}.yml"
+
+
   
     - name: Check if cluster if exists
       stat:
