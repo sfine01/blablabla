@@ -10,7 +10,7 @@
         activity_name: "{{ ansible_eda.rule }}"
         time: "WTF"
 
-     - set_fact:
+    - set_fact:
         activities_path: "records/activities/"
         cluster_file_path: "records/clusters/{{ cluster_name }}.yml"
 
