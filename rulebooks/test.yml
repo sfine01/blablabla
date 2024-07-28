@@ -76,6 +76,8 @@
         - run_job_template:
             name: patch_activity
             organization: Default
+            job_args:
+              shay: fine
 
 
 
