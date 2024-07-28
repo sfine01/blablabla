@@ -1,6 +1,0 @@
-copy_all_the_files:
-  - name: cluster_x
-    time: 10:16_21.1.2024
-    
-  - name: cluster_y
-    time: 22:59_21.3.2024
