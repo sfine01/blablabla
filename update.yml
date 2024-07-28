@@ -25,7 +25,7 @@
       copy:
         dest: "{{ cluster_file_path }}"
         content: |
-          {{ cluster_name}}:
+          {{ cluster_name }}:
       when: cluster_file_status.stat.exists == false
 
     - name: Render the Jinja2 template to a temporary file
