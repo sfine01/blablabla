@@ -17,8 +17,7 @@
           post_events: true
           job_args:
             limit: "{{ event.payload.message }}"
-
-          
+            
 ##################################################################
 
     - name: do_things_1               # the condition should check that the cluster file doesnt contains the activity name!!!!
@@ -35,8 +34,23 @@
         - post_event:
             event:
               activity_name: "do_things_1" 
-              
 
+    - name: do_things_2
+      condition:                          
+        all:
+          - event.cluster_x_activities is not selectattr('name', '==', 'do_things_2')
+          - event.payload.message is defined
+      actions:
+        - run_job_template:
+            name: do_things_2 
+            organization: Default
+            job_args:
+              limit: "{{ events.m_1.payload.message }}" 
+        - post_event:
+            event:
+              activity_name: "do_things_2"
+
+              
     # - name: Run XYXYXYXY              
     #   condition:                          
     #     all:
@@ -54,14 +68,14 @@
 
               
 # #########################################################################
-    - name: This will pach the name activitys to git but just one each time                  ############# This will run each time evet.activity_name will be defined
-      condition:
-        any:
-          - event.activity_name is defined
-      actions:
-        - run_job_template:
-            name: hiiiiiiiiiiiiiiiiiiiiiiiiiiii
-            organization: Default
+    # - name: This will pach the name activitys to git but just one each time                  ############# This will run each time evet.activity_name will be defined
+    #   condition:
+    #     any:
+    #       - event.activity_name is defined
+    #   actions:
+    #     - run_job_template:
+    #         name: hiiiiiiiiiiiiiiiiiiiiiiiiiiii
+    #         organization: Default
 
 
 
