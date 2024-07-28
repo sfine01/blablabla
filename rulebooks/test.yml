@@ -68,14 +68,14 @@
 
               
 # #########################################################################
-    # - name: This will pach the name activitys to git but just one each time                  ############# This will run each time evet.activity_name will be defined
-    #   condition:
-    #     any:
-    #       - event.activity_name is defined
-    #   actions:
-    #     - run_job_template:
-    #         name: hiiiiiiiiiiiiiiiiiiiiiiiiiiii
-    #         organization: Default
+    - name: Add activity name to the list               ############# This will run each time evet.activity_name will be defined
+      condition:
+        any:
+          - event.activity_name is defined
+      actions:
+        - run_job_template:
+            name: patch_activity
+            organization: Default
 
 
 
