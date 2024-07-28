@@ -77,7 +77,7 @@
             name: patch_activity
             organization: Default
             job_args:
-              shay: fine
+              shay: "{{ events.m_1.payload.message }}" 
 
 
 
