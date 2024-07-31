@@ -8,7 +8,7 @@
     - set_fact:
         cluster_name: "{{ ansible_eda.event.cluster_name }}"
         activity_name: "{{ ansible_eda.rule }}"
-        time: "WTF"
+        time: "Add a Timestep thing"
         
     - set_fact:
         activity_file_path: "record/activities/{{ activity_name }}.yml"
@@ -54,6 +54,15 @@
         
     - name: Append the rendered content to the output file
       shell: cat /tmp/activity_file_template.txt >> {{ activity_file_path }}
+
+
+
+    - name: print activity_file_path
+      shell: cat {{ activity_file_path }}
+
+
+    - name: print cluster_file_path
+      shell: cat {{ cluster_file_path }}
 
 
       
