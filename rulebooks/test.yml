@@ -43,8 +43,8 @@
         # - run_job_template:
         #     name: patch_activity
         #     organization: Default
-        - debug:
-            msg: "{{ event }}"
+        - print_event:
+            pretty: true
 
 
     # - name: do_things_3
