@@ -40,22 +40,24 @@
             organization: Default
             job_args:
               limit: "{{ event.cluster_name }}" 
-        - run_job_template:
-            name: patch_activity
-            organization: Default
+        # - run_job_template:
+        #     name: patch_activity
+        #     organization: Default
+        - debug:
+            msg: "{{ event }}"
 
 
-    - name: do_things_3
-      condition: event.completed_activities is not selectattr('name', '==', 'do_things_3')
-      actions:
-        - run_job_template:
-            name: do_things_3 
-            organization: Default
-            job_args:
-              limit: "{{ event.cluster_name }}" 
-        - run_job_template:
-            name: patch_activity
-            organization: Default
+    # - name: do_things_3
+    #   condition: event.completed_activities is not selectattr('name', '==', 'do_things_3')
+    #   actions:
+    #     - run_job_template:
+    #         name: do_things_3 
+    #         organization: Default
+    #         job_args:
+    #           limit: "{{ event.cluster_name }}" 
+    #     - run_job_template:
+    #         name: patch_activity
+    #         organization: Default
             
 ##################################################################
 
