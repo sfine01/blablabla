@@ -1,0 +1,39 @@
+---
+- name: Listen for events on a webhook
+  hosts: all
+  match_multiple_rules: true
+  sources:
+    - ansible.eda.webhook:
+        host: 0.0.0.0
+        port: 5000
+  rules:
+  
+    - name: Get clusters activity list
+      condition: event.payload.message is defined
+      action:
+        run_job_template:
+          name: get_activities
+          organization: Default
+          post_events: true
+          job_args:
+            limit: "{{ event.payload.message }}"
+            
+##################################################################
+
+    - name: do_things_1
+      condition: event.completed_activities is not selectattr('name', '==', 'do_things_1')
+      actions:
+        - run_job_template:
+            name: do_things_1 
+            organization: Default
+            job_args:
+              limit: "{{ event.cluster_name }}" 
+
+    - name: do_things_2
+      condition: event.completed_activities is not selectattr('name', '==', 'do_things_2')
+      actions:
+        - run_job_template:
+            name: do_things_2 
+            organization: Default
+            job_args:
+              limit: "{{ event.cluster_name }}" 
