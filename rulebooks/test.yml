@@ -40,11 +40,9 @@
             organization: Default
             job_args:
               limit: "{{ event.cluster_name }}" 
-        # - run_job_template:
-        #     name: patch_activity
-        #     organization: Default
-        - print_event:
-            pretty: true
+        - run_job_template:
+            name: patch_activity
+            organization: Default
 
 
     # - name: do_things_3
