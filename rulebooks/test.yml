@@ -39,10 +39,11 @@
             name: do_things_2 
             organization: Default
             job_args:
-              limit: "{{ event.cluster_name }}" 
-        - run_job_template:
-            name: patch_activity
-            organization: Default
+              limit: "{{ event }}"
+        #       limit: "{{ event.cluster_name }}" 
+        # - run_job_template:
+        #     name: patch_activity
+        #     organization: Default
 
 
     # - name: do_things_3
