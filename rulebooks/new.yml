@@ -46,3 +46,13 @@
             organization: Default
             job_args:
               limit: "{{ event.cluster_name }}" 
+
+
+    - name: cat
+      condition: event.completed_activities is not selectattr('name', '==', 'cat')
+      actions:
+        - run_job_template:
+            name: cat 
+            organization: Default
+            job_args:
+              limit: "{{ event.cluster_name }}" 
